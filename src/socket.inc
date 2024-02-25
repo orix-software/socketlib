@@ -1,0 +1,6 @@
+
+AF_UNIX = 1
+
+
+SOCKET_ERROR = 0
+
