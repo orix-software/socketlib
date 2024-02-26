@@ -1,0 +1,4 @@
+mkdir libs
+curl --insecure -o libs/ch395lib.tgz http://repo.orix.oric.org/dists/2024.1/tgz/6502/ch395lib.tgz
+cd libs/ && tar xvfz ch395lib.tgz && cd ..
+rm libs/ch395lib.tgz

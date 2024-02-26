@@ -1,0 +1,57 @@
+
+.macro socket_connect src_port, dest_port, ip_dest
+    pha
+    .if (.match(.left(1, {ip_dest}), {(}) )
+        .if (.match(.right(1,{ip_dest}), {)}))
+            ldy .mid (1,.tcount ({ip_dest})-2, {ip_dest})
+            ldx 1+(.mid (1,.tcount ({ip_dest})-2, {ip_dest}))
+        .else
+            .error "error: ')' missing"
+        .endif
+
+    .else
+        ; Set ip address
+        ldy     #<ip_dest
+        ldx     #>ip_dest
+    .endif
+    jsr     _ch395_set_ip_addr_sn
+    pla
+    ; dest port
+    pha
+    .if (.match(.left(1, {dest_port}), {(}) )
+
+        .if (.match(.right(1,{dest_port}), {)}))
+            ldy .mid (1,.tcount ({dest_port})-2, {dest_port})
+            ldx 1+(.mid (1,.tcount ({dest_port})-2, {dest_port}))
+        .else
+            .error "error: ')' missing"
+        .endif
+
+    .else
+        ldx     #>dest_port
+        ldy     #<dest_port
+    .endif
+    jsr     _ch395_set_des_port_sn
+    pla
+    pha
+    ; source port
+
+   .if (.match(.left(1, {src_port}), {(}) )
+
+        .if (.match(.right(1,{src_port}), {)}))
+            ldy .mid (1,.tcount ({src_port})-2, {src_port})
+            ldx 1+(.mid (1,.tcount ({src_port})-2, {src_port}))
+        .else
+            .error "error: ')' missing"
+        .endif
+
+    .else
+        ldx     #>src_port
+        ldy     #<src_port
+    .endif
+    jsr     _ch395_set_sour_port_sn
+    pla
+
+    jsr     socket_open_test
+.endmacro
+
