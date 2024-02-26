@@ -22,8 +22,7 @@
     ;;@brief Get socket data
     ;;@inputX Socket id
     ;;@inputA Low ptr to store the buffer
-    ;;@inputY Low ptr to store the buffer
-    ;socket_test
+    ;;@inputY High ptr to store the buffer
     stx     save_socket_id
     sta     ptr1
     sty     ptr1+1

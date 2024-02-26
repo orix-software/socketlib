@@ -25,7 +25,6 @@ SOCKET_DEBUG=1
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
 
-
 .proc socket
     ;;@brief Open a socket
     ;;@returnsX The socket id
@@ -88,7 +87,6 @@ socketfound:
     cpy     #SOCK_RAW
     beq     @not_ip_raw
 
-
 @not_ip_raw:
     ldx     tmp_protocol
     jsr     ch395_set_proto_type_sn
@@ -102,7 +100,6 @@ socketfound:
     ldx     tmp_socket
     lda     tmp_protocol
     sta     socket_protocol,x
-
 
     lda     tmp_socket ; return the id of the socket
     rts
