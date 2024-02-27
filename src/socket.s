@@ -19,16 +19,25 @@
 
 .export socket_state,socket_protocol
 
-SOCKET_DEBUG=1
+SOCKET_DEBUG = 1
 
 .export socket
+
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
 
 .proc socket
     ;;@brief Open a socket
     ;;@returnsX The socket id
-    ;;@returnsA if != -1
+    ;;@returnsA if != -1 socket id
+    ;;@```ca65
+    ;;@` ; or use Macro (socket.mac) SOCKET domain, type, protocol
+    ;;@` lda     #$00
+    ;;@` ldx     #AF_INET
+    ;;@` ldy     #SOCK_STREAM
+    ;;@` jsr     socket
+    ;;@```
+
     ; Looking for available socket
 
 .ifdef SOCKET_DEBUG
