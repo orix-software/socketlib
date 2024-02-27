@@ -2,6 +2,20 @@
 
 ## bind
 
+***Input***
+
+* X Register : Socket id
+* Accumulator : Low byte of port
+* Y Register : High byte of port
+
+***Returns***
+
+* Accumulator : XX 
+
+* X Register : XX 
+
+* Y Register : XX 
+
 
 
 ## socket_close
@@ -29,7 +43,7 @@ Get socket data
 
 * X Register : Socket id
 * Accumulator : Low ptr to store the buffer
-* Y Register : Low ptr to store the buffer
+* Y Register : High ptr to store the buffer
 
 
 ## socket
@@ -43,7 +57,18 @@ Open a socket
 
 * X Register : The socket id
 
-* Accumulator : if != -1
+* Accumulator : if != -1 socket id
+
+
+***Example***
+
+```ca65
+ ; or use Macro (socket.mac) SOCKET domain, type, protocol
+ lda #$00
+ ldx #AF_INET
+ ldy #SOCK_STREAM
+ jsr socket
+```
 
 
 
