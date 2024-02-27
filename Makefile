@@ -13,7 +13,11 @@ else
         AR = $(CC65_HOME)/bin/ar65
 endif
 
-all: $(SOURCES8) $(OBJECTS8)
+all: init $(SOURCES8) $(OBJECTS8)
+
+
+init: $(SOURCE)
+	./configure
 
 $(OBJECTS8): $(SOURCES8)
 	@mkdir target/telestrat/lib/ -p
