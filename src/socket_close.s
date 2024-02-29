@@ -6,6 +6,7 @@
 SOCKET_CLOSE_DEBUG=1
 
 .export socket_close
+
 .import ch395_close_socket_sn
 .import ch395_get_cmd_status
 .import ch395_get_socket_status_sn

@@ -1,6 +1,6 @@
 
-SOCK_STREAM = CH395_PROTO_TYPE_TCP		; stream (connection) socket
-SOCK_DGRAM  = CH395_PROTO_TYPE_UDP		; datagram (conn.less) socket
+SOCK_STREAM = CH395_PROTO_TYPE_TCP    ; stream (connection) socket
+SOCK_DGRAM  = CH395_PROTO_TYPE_UDP    ; datagram (conn.less) socket
 SOCK_RAW    = CH395_PROTO_TYPE_IP_RAW
 
 INVALID_SOCKET = 255
@@ -9,8 +9,8 @@ SOCKET_ERROR   = 254
 ; https://www.cisco.com/c/en/us/td/docs/ios/sw_upgrades/interlink/r2_0/unpremsg/mucsock.html
 
 NETWORK_MAX_SOCKET = 4
-;AF_UNIX		1	/* Unix domain sockets 		*/
-AF_INET		= 2	   ;
+AF_UNIX            = 1 ; /* Unix domain sockets*/
+AF_INET            = 2 ;
 
 EPROTOTYPE      = 41 ; Protocol wrong type
 ESOCKTNOSUPPORT = 44 ; Socket type not supported
@@ -37,11 +37,11 @@ EHOSTUNREACH    = 65 ; No route to host
 ;ETOOMANYREFS  59 Too many references
 
 .struct _SOCKET
-      type           .byte
-      protocol       .byte
-      id_socket      .byte
-      src_port       .res 2
-      sin_addr       .res 4
-      sin_port       .res 2
-      sin_family     .byte
+    type           .byte
+    protocol       .byte
+    id_socket      .byte
+    src_port       .res 2
+    sin_addr       .res 4
+    sin_port       .res 2
+    sin_family     .byte
 .endstruct

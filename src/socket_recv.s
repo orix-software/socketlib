@@ -75,7 +75,7 @@
     ldx     save_x
 
     inx
-    cpx     #255            ; Ne pas faire moins car l'interruption peut mettre du temps
+    cpx     #255                            ; Ne pas faire moins car l'interruption peut mettre du temps
     bne     @read_bytes_test
     jmp     @exit_get
 
@@ -83,7 +83,7 @@
 
 @read_buffer:
     lda     save_socket_id                  ; Set socket
-    jsr     ch395_get_int_status_sn        ; Get global IRQ
+    jsr     ch395_get_int_status_sn         ; Get global IRQ
 
     and     #CH395_SINT_STAT_RECV           ; Do we received something ?
     cmp     #CH395_SINT_STAT_RECV
@@ -154,6 +154,7 @@ save_x:
 save_socket_id:
     .res 1
 
+.ifdef SOCKET_DEBUG
 str_debug_socket_recv:
     .asciiz "[libsocket/socket_recv.s] "
 
@@ -162,6 +163,8 @@ str_debug_socket_recv_waiting_buffer:
 
 str_debug_socket_recv_received_buffer:
     .asciiz "Received recv buffer bytes : "
+.endif
+
 .endproc
 
 CH395_GINT_STAT_SOCKX:
@@ -169,7 +172,7 @@ CH395_GINT_STAT_SOCKX:
     .byte   CH395_GINT_STAT_SOCK1
     .byte   CH395_GINT_STAT_SOCK2
     .byte   CH395_GINT_STAT_SOCK3
-    ; .byte   CH395_GINT_STAT_SOCK4
-    ; .byte   CH395_GINT_STAT_SOCK5
-    ; .byte   CH395_GINT_STAT_SOCK6
-    ; .byte   CH395_GINT_STAT_SOCK7
+    .byte   CH395_GINT_STAT_SOCK4
+    .byte   CH395_GINT_STAT_SOCK5
+    .byte   CH395_GINT_STAT_SOCK6
+    .byte   CH395_GINT_STAT_SOCK7

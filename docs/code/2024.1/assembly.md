@@ -74,6 +74,10 @@ Open a socket
 
 ## socket_send
 
+***Description***
+
+Send data into socket
+
 ***Input***
 
 * X Register : Socket id

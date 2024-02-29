@@ -4,7 +4,6 @@
 ; SOCKET sock = SOCKET AF_INET, SOCK_STREAM, 0
 
 .macro SOCKET domain, type, protocol
-
     lda     #$00
     ldx     #domain
     ldy     #type
@@ -45,7 +44,7 @@
 ; Loop until socket is connected
 @wait_connection:
     lda     socket_id ; socket 0
-    jsr     _ch395_get_int_status_sn
+    jsr     ch395_get_int_status_sn
 
     and     #CH395_SINT_STAT_CONNECT
     cmp     #CH395_SINT_STAT_CONNECT ; Success

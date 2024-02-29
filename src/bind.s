@@ -12,6 +12,7 @@
 .import ch395_tcp_listen_sn
 
 .proc bind
+    ;;@brief Bind sockets
     ;;@inputX Socket id
     ;;@inputA Low byte of port
     ;;@inputY High byte of port
@@ -40,7 +41,6 @@
     jsr     ch395_get_cmd_status
     cmp     #CH395_ERR_SUCCESS
     bne     @waiting_for_listen
-
 
     rts
 

@@ -15,7 +15,6 @@ endif
 
 all: init $(SOURCES8) $(OBJECTS8)
 
-
 init: $(SOURCE)
 	./configure
 

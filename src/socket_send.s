@@ -12,6 +12,7 @@
 .importzp ptr1
 
 .proc socket_send
+    ;;@brief Send data into socket
     ;;@inputX Socket id
     ;;@inputA Low ptr of the buffer
     ;;@inputY High ptr of the buffer
