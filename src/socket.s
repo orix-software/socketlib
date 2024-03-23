@@ -11,8 +11,8 @@
     ; ldx     #AF_INET
     ; ldy     #SOCK_DGRAM
     ; jsr     socket
-.include "../libs/usr/include/asm/ch395.inc"
-.include "include/socket.inc"
+.include "ch395.inc"
+.include "socket.inc"
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"
@@ -30,8 +30,14 @@ SOCKET_DEBUG = 1
     ;;@brief Open a socket
     ;;@returnsX The socket id
     ;;@returnsA if != -1 socket id
+
     ;;@```ca65
     ;;@` ; or use Macro (socket.mac) SOCKET domain, type, protocol
+    ;;@` SOCKET AF_INET, SOCK_STREAM, 0
+    ;;@`
+    ;;@```
+
+    ;;@```ca65
     ;;@` lda     #$00
     ;;@` ldx     #AF_INET
     ;;@` ldy     #SOCK_STREAM

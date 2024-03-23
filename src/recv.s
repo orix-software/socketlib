@@ -6,8 +6,10 @@
 ; Y error
 ; Timemout  => (#ETIMEDOUT)
 ; OK  => (#EOK) - A and X contains the length
-.include "include/socket.inc"
-.include "../libs/usr/include/asm/ch395.inc"
+.include "socket.inc"
+.include "ch395.inc"
+
+.export recv
 
 .import ch395_get_glob_int_status
 .import ch395_get_int_status_sn
@@ -18,7 +20,7 @@
 
 .include "errno.inc"
 
-.proc socket_recv
+.proc recv
     ;;@brief Get socket data
     ;;@inputX Socket id
     ;;@inputA Low ptr to store the buffer
@@ -172,7 +174,7 @@ CH395_GINT_STAT_SOCKX:
     .byte   CH395_GINT_STAT_SOCK1
     .byte   CH395_GINT_STAT_SOCK2
     .byte   CH395_GINT_STAT_SOCK3
-    .byte   CH395_GINT_STAT_SOCK4
-    .byte   CH395_GINT_STAT_SOCK5
-    .byte   CH395_GINT_STAT_SOCK6
-    .byte   CH395_GINT_STAT_SOCK7
+    ; .byte   CH395_GINT_STAT_SOCK4
+    ; .byte   CH395_GINT_STAT_SOCK5
+    ; .byte   CH395_GINT_STAT_SOCK6
+    ; .byte   CH395_GINT_STAT_SOCK7

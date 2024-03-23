@@ -1,7 +1,7 @@
 ;debug_socket = 1
 .include "errno.inc"
-.include "../libs/usr/include/asm/ch395.inc"
-.include "include/socket.inc"
+.include "ch395.inc"
+.include "socket.inc"
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"

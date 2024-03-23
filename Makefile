@@ -1,6 +1,8 @@
 SOURCES8=$(wildcard src/*.s)
 OBJECTS8=$(SOURCES8:.s=.o)
 
+
+
 ifeq ($(CC65_HOME),)
         CC = cl65
         AS = ca65
@@ -13,21 +15,25 @@ else
         AR = $(CC65_HOME)/bin/ar65
 endif
 
-all: init $(SOURCES8) $(OBJECTS8)
+all: init $(SOURCES8) $(OBJECTS8) test
 
 init: $(SOURCE)
 	./configure
 
 $(OBJECTS8): $(SOURCES8)
 	@mkdir target/telestrat/lib/ -p
-	@$(AS) -ttelestrat $(@:.o=.s) -o $@ --include-dir src/include
+	@$(AS) -ttelestrat $(@:.o=.s) -o $@ --include-dir src/include -I libs/usr/include/asm/
 	@$(AR) r socket.lib $@
 	@mkdir -p build/lib8
-	@mkdir -p build/usr/include/
+	@mkdir -p build/usr/include/sys
 	@mkdir -p build/usr/include/asm
-	@cp src/include/socket.h build/usr/include/
+	@cp src/socket.mac build/usr/include/asm
+	@cp src/include/socket.h build/usr/include/sys/
 	@cp src/include/socket.inc build/usr/include/asm/
 	@cp socket.lib build/lib8/
+
+test:
+	@$(CC) -I src/include -ttelestrat test/gethttp.c libs/lib8/inet.lib socket.lib -o gethttp/
 
 # tool:
 # 	@mkdir -p target/telestrat/ch395cfg/

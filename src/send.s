@@ -1,7 +1,7 @@
 .include "telestrat.inc"
 
-.include "../libs/usr/include/asm/ch395.inc"
-.include "include/socket.inc"
+.include "ch395.inc"
+.include "socket.inc"
 
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
@@ -11,7 +11,9 @@
 
 .importzp ptr1
 
-.proc socket_send
+.export send
+
+.proc send
     ;;@brief Send data into socket
     ;;@inputX Socket id
     ;;@inputA Low ptr of the buffer
@@ -22,8 +24,13 @@
     ;;@returnsX High byte of the length
     ;;@returnsY Error type
 
-    sta     ptr1
-    sty     ptr1+1
+    ;;@```ca65
+    ;;@`; Use SENDTO macro
+    ;;@`  SENDTO current_socket, str_password, 11
+    ;;@`  rts
+
+    sta     RESB
+    sty     RESB+1
     stx     save_socket_id
 
     ldy     RES

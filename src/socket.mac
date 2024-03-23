@@ -25,14 +25,14 @@
 
     lda     #<buf
     ldy     #>buf
-    jsr     socket_send
+    jsr     send
 .endmacro
 
 .macro RECVFROM socket, buffer, len
     ldx     socket
     lda     #<buffer
     ldy     #>buffer
-    jsr     socket_recv
+    jsr     recv
 .endmacro
 
 .macro SOCKETCLOSE socket_id

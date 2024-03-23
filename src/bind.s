@@ -1,8 +1,6 @@
 .include "telestrat.inc"
-
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
-
-.include "../libs/usr/include/asm/ch395.inc"
+.include "ch395.inc"
 
 .export bind
 
