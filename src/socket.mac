@@ -67,7 +67,7 @@
         ldy     #<ip_dest
         ldx     #>ip_dest
     .endif
-    jsr     _ch395_set_ip_addr_sn
+    jsr     ch395_set_ip_addr_sn
     pla
     ; dest port
     pha
@@ -84,7 +84,7 @@
         ldx     #>dest_port
         ldy     #<dest_port
     .endif
-    jsr     _ch395_set_des_port_sn
+    jsr     ch395_set_des_port_sn
     pla
     pha
     ; source port
@@ -102,7 +102,7 @@
         ldx     #>src_port
         ldy     #<src_port
     .endif
-    jsr     _ch395_set_sour_port_sn
+    jsr     ch395_set_sour_port_sn
     pla
 
     jsr     socket_open_test

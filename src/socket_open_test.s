@@ -7,6 +7,7 @@
 .include "telestrat.inc"
 
 .export socket_open_test
+
 .import ch395_get_socket_status_sn
 .import ch395_get_int_status_sn
 .import ch395_open_socket_sn
