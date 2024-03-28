@@ -6,24 +6,48 @@
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"
 
-.export socket_open_test
+.export connect
 
 .import ch395_get_socket_status_sn
 .import ch395_get_int_status_sn
 .import ch395_open_socket_sn
 .import ch395_tcp_connect_sn
-.import socket_protocol
+.import ch395_set_sour_port_sn
+.import ch395_set_des_port_sn
+.import ch395_set_ip_addr_sn
 
-.proc socket_open_test
-    ; save socket id
-    sta     save_socket_id
+.import socket_protocol
+.import socket_sour_port
+
+.proc connect
+    ;;@brief Perform connect to socket
+    ;;@inputA Socket id
+    ;;@inputY Low ip dest
+    ;;@inputX High ip dest
+    ;;@inputMEM_RESB Low/high dest port
+    ;;@modifyMEM_TR0 Used to save socket
+    ;;@modifyMEM_RES tmp
+    sta     TR0
+    jsr     ch395_set_ip_addr_sn ; Warn Use RES
+
+    ldx     RESB
+    ldy     RESB+1
+    jsr     ch395_set_des_port_sn
+
+    ; source port
+    ldx     TR0
+    lda     socket_sour_port,x ; Get source port mapping
+    tay
+    ldx     #$00
+    lda     TR0
+    jsr     ch395_set_sour_port_sn ; Use RES
 
     ; Waiting status
     ldx     #$00
 
 @waiting_for_socket:
     stx     save_x
-    lda     save_socket_id
+    lda     TR0
     jsr     ch395_get_socket_status_sn
 
     cmp     #CH395_SOCKET_OPEN
@@ -33,7 +57,7 @@
     beq     @exit_busy
 
     ; open socket
-    lda     save_socket_id
+    lda     TR0
     jsr     ch395_open_socket_sn
 
 @waiting:
@@ -44,26 +68,23 @@
     jmp     @waiting_for_socket
 
 @exit_near:
-    lda     #ENOTCONN ; return error
+    ; Not connected
+    lda     #SOCKET_ERROR ; return error
     rts
 
 @socket_used:
     jmp     @exit_near
 
 @exit_busy:
-    lda     #EBUSY
+    ; Busy
+    lda     #SOCKET_ERROR
     rts
 
 @exit:
     rts
 
 @continue:
-
-.ifdef  SOCKET_OPEN_DEBUG
-    print   str_socket_opened
-.endif
-
-    ldx     save_socket_id
+    ldx     TR0
     lda     socket_protocol,x
     cmp     #SOCK_DGRAM   ; Udp ? yes
     beq     @connected
@@ -72,7 +93,7 @@
 
    ; cmp     #IP
 
-    lda     save_socket_id
+    lda     TR0
     jsr     ch395_tcp_connect_sn
 
 @init_waiting_connection:
@@ -88,28 +109,27 @@
 
     ldy     save_y
     ldx     save_x
-    lda     save_socket_id ; socket 0
+    lda     TR0 ; socket 0
     jsr     ch395_get_int_status_sn
     and     #CH395_SINT_STAT_CONNECT
     cmp     #CH395_SINT_STAT_CONNECT
     beq     @connected_tcp
     ldx     save_x
     inx
-    cpx     #2
+    cpx     #$02
     bne     @waiting_for_connection
     dey
     bne     @waiting_for_connection
-    lda     #ECONNREFUSED
+    ; Connection refused
+    lda     #SOCKET_ERROR
     rts
 
 @connected_tcp:
-    print   str_socket_opened_tcp
-    lda     #$00
+    lda     #$00 ; OK
     rts
 
 @connected:
-    print   str_socket_opened_udp
-    lda     #$00
+    lda     #$00 ; OK
     rts
 
 save_x:
@@ -117,19 +137,4 @@ save_x:
 
 save_y:
     .res 1
-
-save_socket_id:
-    .res 1
-
-str_socket_opened_tcp:
-    .byte "[libsocket/socket_open_test.s][TCP] Socket opened",$0A,$0D,$00
-
-str_socket_opened_udp:
-    .byte "[libsocket/socket_open_test.s][UDP] Socket opened",$0A,$0D,$00
-
-str_socket_opened:
-    .byte"[libsocket/socket_open_test.s] Socket opened",$0A,$0D,$00
-
-str_socket_opening:
-    .byte"[libsocket/socket_open_test.s] Opening socket ...",$0A,$0D,$00
 .endproc

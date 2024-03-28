@@ -1,36 +1,29 @@
-; SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
-
-; ipraw icmp/ping
-; socket(AF_INET,SOCK_RAW,0)
-
-
-; A = 0
-; Y SOCK_STREAM/SOCK_DGRAM/CH395_PROTO_TYPE_IP_RAW
-; X : AF_INET (erased and not used)
-    ; lda     #$00
-    ; ldx     #AF_INET
-    ; ldy     #SOCK_DGRAM
-    ; jsr     socket
 .include "ch395.inc"
 .include "socket.inc"
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"
 
-.export socket_state,socket_protocol
 
-SOCKET_DEBUG = 1
 
 .export socket
 
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
 
+.export socket_state, socket_protocol
+.export socket_sour_port
+
 .proc socket
     ;;@brief Open a socket
+    ;;@inputA protocol
+    ;;@inputX domain
+    ;;@inputY type
+    ;;@modifyMEM_RES
     ;;@returnsX The socket id
     ;;@returnsA if != -1 socket id
 
+    ; sock = socket(AF_INET, SOCK_STREAM, 0);
     ;;@```ca65
     ;;@` ; or use Macro (socket.mac) SOCKET domain, type, protocol
     ;;@` SOCKET AF_INET, SOCK_STREAM, 0
@@ -39,22 +32,16 @@ SOCKET_DEBUG = 1
 
     ;;@```ca65
     ;;@` lda     #$00
-    ;;@` ldx     #AF_INET
-    ;;@` ldy     #SOCK_STREAM
+    ;;@` ldx     #AF_INET ; domain
+    ;;@` ldy     #SOCK_STREAM ; type
     ;;@` jsr     socket
     ;;@```
 
+    ; socket_state contains 0 if socket is not used, or contains type if used
+
     ; Looking for available socket
 
-.ifdef SOCKET_DEBUG
-    sta     debug_save_A
-    sty     debug_save_Y
-    stx     debug_save_X
-    print str_opening_socket
-    lda     debug_save_A
-    ldy     debug_save_Y
-    ldx     debug_save_X
-.endif
+    stx     RES
 
     ldx     #$00
 
@@ -66,44 +53,27 @@ SOCKET_DEBUG = 1
     bne     @L1
     ; Error, return INVALID
 
-.ifdef SOCKET_DEBUG
-    print   str_socket_overflow
-.endif
-
     lda     #INVALID_SOCKET
     rts
 
 socketfound:
-.ifdef SOCKET_DEBUG
-    txa     ; Get socket id
-    pha     ; Save
-    print   str_allocating_socket_id
-
-    pla     ; restore for XDECIM
-
-    pha     ; save for next code
-
-    ldy     #$00
-    ldx     #$01
-    BRK_TELEMON XDECIM
-    crlf
-    pla
-    tax ; Restore socket id for the next code
-    ldy     debug_save_Y
-.endif
-
-    lda     #AF_INET                ; Store Socket type
-    sta     socket_state,x          ;
+    ; X contains the id of the socket
+    ;
+    lda     RES                ; Store Socket type
+    sta     socket_state,x     ;
     ; X contains the id of the socket here
-    txa     ; Get the id socket
-    sta     tmp_socket               ; Save socket_id
-    sty     tmp_protocol             ; Save
+    stx     RES               ; Save socket_id
+    pha
+    tya
+    sta     socket_domain,x             ; Save
+    pla
 
     cpy     #SOCK_RAW
     beq     @not_ip_raw
 
 @not_ip_raw:
-    ldx     tmp_protocol
+    tax     ; Contains TCP/UDP type
+    lda     RES ; Get socket id
     jsr     ch395_set_proto_type_sn
     jmp     @exit_socket
 
@@ -112,43 +82,22 @@ socketfound:
     jsr     ch395_set_ipraw_pro_sn
 
 @exit_socket:
-    ldx     tmp_socket
-    lda     tmp_protocol
-    sta     socket_protocol,x
-
-    lda     tmp_socket ; return the id of the socket
+    lda     RES ; return the id of the socket
     rts
 
-tmp_socket:
-    .res 1
-
-tmp_protocol:
-    .res 1
 .endproc
 
 socket_state:
-    .res NETWORK_MAX_SOCKET
+    .byt 0,0,0,0,0,0,0,0
 
 socket_protocol:
     .res NETWORK_MAX_SOCKET
 
-.ifdef SOCKET_DEBUG
+socket_domain:
+    .res NETWORK_MAX_SOCKET
 
-str_opening_socket:
-    .byte "[libsocket/socket.s] Opening socket  ",$0A,$0D,$00
-
-str_socket_overflow:
-    .byte "[libsocket/socket.s] id Socket overflow",$0A,$0D,$00
-
-str_allocating_socket_id:
-    .byte "[libsocket/socket.s] Allocating socket id : ",$00
-
-debug_save_A:
-    .res 1
-
-debug_save_X:
-    .res 1
-
-debug_save_Y:
-    .res 1
-.endif
+; Read only
+; Define source port to use to connect to dest port
+; The first byte define the source port for socket 0
+socket_sour_port:
+    .byt 170,171,172,173,174,175,176,177

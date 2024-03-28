@@ -4,7 +4,7 @@ SOCK_DGRAM  = CH395_PROTO_TYPE_UDP    ; datagram (conn.less) socket
 SOCK_RAW    = CH395_PROTO_TYPE_IP_RAW
 
 INVALID_SOCKET = 255
-SOCKET_ERROR   = 254
+SOCKET_ERROR   = 255
 
 ; https://www.cisco.com/c/en/us/td/docs/ios/sw_upgrades/interlink/r2_0/unpremsg/mucsock.html
 
@@ -36,12 +36,8 @@ EHOSTUNREACH    = 65 ; No route to host
 ;ESHUTDOWN 58 Can't send after shutdown
 ;ETOOMANYREFS  59 Too many references
 
-.struct _SOCKET
-    type           .byte
-    protocol       .byte
-    id_socket      .byte
-    src_port       .res 2
-    sin_addr       .res 4
-    sin_port       .res 2
-    sin_family     .byte
+.struct sockaddr_in
+   sin_family .byte ; e.g. AF_INET
+   sin_port   .word   ; e.g. htons(3490)
+   sin_addr   .res 4  ;long sin_addr
 .endstruct

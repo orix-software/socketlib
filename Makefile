@@ -1,8 +1,6 @@
 SOURCES8=$(wildcard src/*.s)
 OBJECTS8=$(SOURCES8:.s=.o)
 
-
-
 ifeq ($(CC65_HOME),)
         CC = cl65
         AS = ca65
@@ -33,7 +31,7 @@ $(OBJECTS8): $(SOURCES8)
 	@cp socket.lib build/lib8/
 
 test:
-	@$(CC) -I src/include -ttelestrat test/gethttp.c libs/lib8/inet.lib socket.lib -o gethttp/
+	@$(CC) -ttelestrat -I src/include -I libs/include test/gethttp.c socket.lib libs/lib8/ch395-8.lib -o gethttp
 
 # tool:
 # 	@mkdir -p target/telestrat/ch395cfg/

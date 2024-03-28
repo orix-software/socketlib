@@ -3,20 +3,18 @@
 #define AF_INET   2	/* Internet IP Protocol 	*/
 
 /* Socket types. */
-#define SOCK_STREAM	1	/* stream (connection) socket	*/
-#define SOCK_DGRAM	2	/* datagram (conn.less) socket	*/
-#define SOCK_RAW	3		/* raw socket			*/
-#define SOCK_RDM	     4		/* reliably-delivered message	*/
-#define SOCK_SEQPACKET 5		/* sequential packet socket	*/
-#define SOCK_PACKET	10		/* linux specific way of	*/
+#define SOCK_STREAM	  3	/* stream (connection) socket	*/
+#define SOCK_DGRAM	  2	/* datagram (conn.less) socket	*/
+#define SOCK_RAW	     1	/* raw socket			*/
+#define SOCK_RDM	     4	/* reliably-delivered message	*/
+#define SOCK_SEQPACKET 5	/* sequential packet socket	*/
+#define SOCK_PACKET    10	/* linux specific way of	*/
 
 struct sockaddr_in {
    unsigned char sin_family;   // e.g. AF_INET
    unsigned int  sin_port;     // e.g. htons(3490)
    unsigned long sin_addr;     // see struct in_addr, below
-   char          sin_zero[8];  // zero this if you want to
 };
-
 
 struct sockaddr {
    unsigned char sa_family;      /* Address family */
@@ -32,7 +30,7 @@ unsigned char listen(unsigned char socket, unsigned char backlog);
 unsigned char accept(int socket, struct sockaddr_in* addr, unsigned int addrlen);
 
 
-unsigned int recv(int s, void *buf, unsigned int len, unsigned char flags);
+unsigned int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
 unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsigned char flags);
 
 unsigned int socket_close(unsigned char sockfd);

@@ -8,6 +8,7 @@
 ; OK  => (#EOK) - A and X contains the length
 .include "socket.inc"
 .include "ch395.inc"
+.include "telestrat.inc"
 
 .export recv
 
@@ -16,18 +17,19 @@
 .import ch395_get_recv_len_sn
 .import ch395_read_recv_buf_sn
 
-.importzp ptr1
+
 
 .include "errno.inc"
 
 .proc recv
     ;;@brief Get socket data
-    ;;@inputX Socket id
-    ;;@inputA Low ptr to store the buffer
+    ;;@inputA Socket id
+    ;;@inputX Low ptr to store the buffer
     ;;@inputY High ptr to store the buffer
-    stx     save_socket_id
-    sta     ptr1
-    sty     ptr1+1
+    ;;@modifyMEM_RES
+    sta     save_socket_id
+    stx     RES
+    sty     RES+1
 
     lda     CH395_GINT_STAT_SOCKX,x
     sta     socket_test
@@ -91,12 +93,6 @@
     cmp     #CH395_SINT_STAT_RECV
     beq     @read_buffer_here
 
-.ifdef SOCKET_DEBUG
-    print   str_debug_socket_recv
-    print   str_debug_socket_recv_waiting_buffer
-    crlf
-.endif
-
     jmp     @restart_read_interrupt_socket
 
 @read_buffer_here:
@@ -114,15 +110,6 @@
     sta     length_receveived
     stx     length_receveived+1
 
-.ifdef SOCKET_DEBUG
-    print   str_debug_socket_recv
-    print   str_debug_socket_recv_received_buffer
-
-    lda     length_receveived
-    ldy     length_receveived+1
-    print_int ,2,2
-    crlf
-.endif
 
     ; Read buffer
 

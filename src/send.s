@@ -9,29 +9,25 @@
 .import ch395_write_send_buf_sn
 .import ch395_get_int_status_sn
 
-.importzp ptr1
-
 .export send
 
 .proc send
     ;;@brief Send data into socket
-    ;;@inputX Socket id
-    ;;@inputA Low ptr of the buffer
-    ;;@inputY High ptr of the buffer
+    ;;@inputA Socket id
+    ;;@inputY Low ptr of the buffer
+    ;;@inputX High ptr of the buffer
     ;;inputMEM_RES Size of the bufer to send
+    ;;@returnsA Error type
 
-    ;;@returnsA Low byte of the length
-    ;;@returnsX High byte of the length
-    ;;@returnsY Error type
 
     ;;@```ca65
     ;;@`; Use SENDTO macro
     ;;@`  SENDTO current_socket, str_password, 11
     ;;@`  rts
 
-    sta     RESB
-    sty     RESB+1
-    stx     save_socket_id
+    sta     save_socket_id
+    sty     RESB
+    stx     RESB+1
 
     ldy     RES
     ldx     RES+1
@@ -50,18 +46,12 @@
     cmp     #CH395_SINT_STAT_SENBUF_FREE
     beq     @success
 
-.ifdef SOCKET_SEND_DEBUG
-    print   str_debug_socket_send
-    print   str_debug_socket_send_waiting_send_buffer
-    crlf
-.endif
-
     ldx     save_x
     inx
     cpx     #$FF
     bne     @waiting_for_output
 
-    lda     #$01        ; Error
+    lda     #$FF        ; Error
     rts
 
 @success:
@@ -73,10 +63,4 @@ save_x:
 
 save_socket_id:
     .res 1
-
-str_debug_socket_send:
-    .asciiz "[libsocket/socket_send.s] "
-
-str_debug_socket_send_waiting_send_buffer:
-    .asciiz "Waiting to have buffer send empty ..."
 .endproc
