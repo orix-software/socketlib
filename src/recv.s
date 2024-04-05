@@ -1,11 +1,3 @@
-; X socket
-; AY ptr
-
-
-; Output :
-; Y error
-; Timemout  => (#ETIMEDOUT)
-; OK  => (#EOK) - A and X contains the length
 .include "socket.inc"
 .include "ch395.inc"
 .include "telestrat.inc"
@@ -17,8 +9,6 @@
 .import ch395_get_recv_len_sn
 .import ch395_read_recv_buf_sn
 
-
-
 .include "errno.inc"
 
 .proc recv
@@ -27,16 +17,17 @@
     ;;@inputX Low ptr to store the buffer
     ;;@inputY High ptr to store the buffer
     ;;@modifyMEM_RES
+    ;;@returnsA Error type
+    ;;@returnsX Low length
+    ;;@returnsY High length
     sta     save_socket_id
-    stx     RES
-    sty     RES+1
+    sty     RES
+    stx     RES+1
 
+    tax
     lda     CH395_GINT_STAT_SOCKX,x
     sta     socket_test
-    ;CH395_GINT_STAT_SOCK0
 
-
-;SINT_STAT_RECV
 @restart_read_interrupt_socket:
     ldx     #$00
 
@@ -119,15 +110,16 @@
     lda     save_socket_id ; socket 0
     jsr     ch395_read_recv_buf_sn
 
-    lda     length_receveived
+    ldy     length_receveived
     ldx     length_receveived+1
 
-    ldy     #EOK
+    lda     #EOK
     rts
 
 @exit_get:
-    ldy     #ETIMEDOUT
-    lda     #$00
+    ; Timeout
+    lda     #$FF
+    ldx     #$00
 
     rts
 

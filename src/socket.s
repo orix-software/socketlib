@@ -21,7 +21,7 @@
     ;;@inputY type
     ;;@modifyMEM_RES
     ;;@returnsX The socket id
-    ;;@returnsA if != -1 socket id
+    ;;@returnsA if != -1 then it returns socket id. -1 is return if all socket are used
 
     ; sock = socket(AF_INET, SOCK_STREAM, 0);
     ;;@```ca65

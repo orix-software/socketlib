@@ -31,7 +31,7 @@ $(OBJECTS8): $(SOURCES8)
 	@cp socket.lib build/lib8/
 
 test:
-	@$(CC) -ttelestrat -I src/include -I libs/include test/gethttp.c socket.lib libs/lib8/ch395-8.lib -o gethttp
+	@$(CC) -ttelestrat -I src/include -I libs/include test/gethttp.c socket.lib libs/lib8/ch395-8.lib libs/lib8/inet.lib -o gethttp
 
 # tool:
 # 	@mkdir -p target/telestrat/ch395cfg/
