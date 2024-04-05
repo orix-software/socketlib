@@ -1,4 +1,5 @@
 #!/bin/bash
+VERSION=`cat VERSION`
 mkdir docs/code/$VERSION
 echo "# Assembly" > docs/code/assembly.md
 echo "" >> docs/code/assembly.md
@@ -6,7 +7,7 @@ echo "" >> docs/code/assembly.md
 echo "# C" > docs/code/c.md
 echo "" >> docs/code/c.md
 pwd
-VERSION=`cat VERSION`
+
 
 echo "# Assembly" > docs/code/$VERSION/assembly.md
 echo "" >> docs/code/$VERSION/assembly.md
