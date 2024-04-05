@@ -16,7 +16,7 @@
     ;;@inputA Socket id
     ;;@inputY Low ptr of the buffer
     ;;@inputX High ptr of the buffer
-    ;;inputMEM_RES Size of the bufer to send
+    ;;@inputMEM_RES Size of the bufer to send
     ;;@returnsA Error type
 
 

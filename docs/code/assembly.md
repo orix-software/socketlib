@@ -97,6 +97,7 @@ Send data into socket
 * Accumulator : Socket id
 * Y Register : Low ptr of the buffer
 * X Register : High ptr of the buffer
+* RES : Size of the bufer to send
 
 ***Returns***
 
