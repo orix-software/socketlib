@@ -20,13 +20,19 @@
 .import socket_sour_port
 
 .proc connect
-    ;;@brief Perform connect to socket
+    ;;@brief Perform connect to socket. Returns socket error if something is wrong
     ;;@inputA Socket id
     ;;@inputY Low ip dest
     ;;@inputX High ip dest
-    ;;@inputMEM_RESB Low/high dest port
-    ;;@modifyMEM_TR0 Used to save socket
+    ;;@inputMEM_RESB  dest port value (16 bits)
+    ;;@modifyMEM_TR0  Used to save socket
     ;;@modifyMEM_RES tmp
+
+    ;;@```ca65
+    ;;@` lda     #$00 ; Socket id
+    ;;@` jsr     connect
+    ;;@```
+
     sta     TR0
     jsr     ch395_set_ip_addr_sn ; Warn Use RES
 

@@ -560,19 +560,23 @@
 </ul>
 <h2 id="connect">connect</h2>
 <p><strong><em>Description</em></strong></p>
-<p>Perform connect to socket</p>
+<p>Perform connect to socket. Returns socket error if something is wrong</p>
 <p><strong><em>Input</em></strong></p>
 <ul>
 <li>Accumulator : Socket id</li>
 <li>Y Register : Low ip dest</li>
 <li>X Register : High ip dest</li>
-<li>RESB : Low/high dest port</li>
+<li>RESB : dest port value (16 bits)</li>
 </ul>
 <p><strong><em>Modify</em></strong></p>
 <ul>
 <li>TR0Used to save socket</li>
 <li>REStmp</li>
 </ul>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mh">$00</span><span class="w"> </span><span class="c1">; Socket id</span>
+<span class="w"> </span><span class="k">jsr</span><span class="w"> </span><span class="n">connect</span>
+</code></pre></div>
 <h2 id="recv">recv</h2>
 <p><strong><em>Description</em></strong></p>
 <p>Get socket data</p>

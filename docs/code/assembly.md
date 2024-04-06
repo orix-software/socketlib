@@ -26,19 +26,27 @@ Bind sockets
 
 ***Description***
 
-Perform connect to socket
+Perform connect to socket. Returns socket error if something is wrong
 
 ***Input***
 
 * Accumulator : Socket id
 * Y Register : Low ip dest
 * X Register : High ip dest
-* RESB : Low/high dest port
+* RESB : dest port value (16 bits)
 
 ***Modify***
 
 * TR0Used to save socket
 * REStmp
+
+***Example***
+
+```ca65
+ lda #$00 ; Socket id
+ jsr connect
+```
+
 
 
 ## recv
