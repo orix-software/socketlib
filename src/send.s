@@ -23,7 +23,7 @@
     ;;@```ca65
     ;;@`; Use SENDTO macro
     ;;@`  SENDTO current_socket, str_password, 11
-    ;;@`  rts
+    ;;@```  rts
 
     sta     save_socket_id
     sty     RESB

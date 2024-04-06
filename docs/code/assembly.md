@@ -117,7 +117,8 @@ Send data into socket
 ```ca65
 ; Use SENDTO macro
  SENDTO current_socket, str_password, 11
- rts
+```
+
 
 
 ## socket_close
