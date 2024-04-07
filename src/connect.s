@@ -29,8 +29,16 @@
     ;;@modifyMEM_RES tmp
 
     ;;@```ca65
+    ;;@` lda     #00  ; Port 80
+    ;;@` sta     RESB
+    ;;@` lda     #80  ; Port
+    ;;@` sta     RESB+1
     ;;@` lda     #$00 ; Socket id
+    ;;@` ldy     #<ip
+    ;;@` ldx     #>ip
     ;;@` jsr     connect
+    ;;@`ip:
+    ;;@`   .byte 192,168,1,77
     ;;@```
 
     sta     TR0

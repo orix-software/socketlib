@@ -588,8 +588,16 @@
 <li>REStmp</li>
 </ul>
 <p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mh">$00</span><span class="w"> </span><span class="c1">; Socket id</span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mi">00</span><span class="w"> </span><span class="c1">; Port 80</span>
+<span class="w"> </span><span class="k">sta</span><span class="w"> </span><span class="n">RESB</span>
+<span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mi">80</span><span class="w"> </span><span class="c1">; Port</span>
+<span class="w"> </span><span class="k">sta</span><span class="w"> </span><span class="n">RESB</span><span class="o">+</span><span class="mi">1</span>
+<span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mh">$00</span><span class="w"> </span><span class="c1">; Socket id</span>
+<span class="w"> </span><span class="k">ldy</span><span class="w"> </span><span class="p">#</span><span class="o">&lt;</span><span class="n">ip</span>
+<span class="w"> </span><span class="k">ldx</span><span class="w"> </span><span class="p">#</span><span class="o">&gt;</span><span class="n">ip</span>
 <span class="w"> </span><span class="k">jsr</span><span class="w"> </span><span class="n">connect</span>
+<span class="nl">ip:</span>
+<span class="w"> </span><span class="kp">.byte</span><span class="w"> </span><span class="mi">192</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">77</span>
 </code></pre></div>
 <h2 id="recv">recv</h2>
 <p><strong><em>Description</em></strong></p>
