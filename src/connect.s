@@ -16,7 +16,7 @@
 .import ch395_set_des_port_sn
 .import ch395_set_ip_addr_sn
 
-.import socket_protocol
+.import socket_state
 .import socket_sour_port
 
 .proc connect
@@ -99,7 +99,7 @@
 
 @continue:
     ldx     TR0
-    lda     socket_protocol,x
+    lda     socket_state,x
     cmp     #SOCK_DGRAM   ; Udp ? yes
     beq     @connected
     cmp     #SOCK_RAW
