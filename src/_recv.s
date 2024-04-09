@@ -12,6 +12,7 @@
 
     ; Drop flag
     jsr     popax ; Get length
+    ; Drop length pour l'instant, car il n'est pas possible de lire qu'un bout 
 
     jsr     popax ; Get ptr
     sta     ptr1

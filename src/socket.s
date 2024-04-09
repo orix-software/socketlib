@@ -11,7 +11,7 @@
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
 
-.export socket_state, socket_protocol
+.export socket_state
 .export socket_sour_port
 
 .proc socket
@@ -41,7 +41,7 @@
 
     ; Looking for available socket
 
-    stx     RES
+    stx     RES ; Save domain
 
     ldx     #$00
 
@@ -59,25 +59,30 @@
 socketfound:
     ; X contains the id of the socket
     ;
-    lda     RES                ; Store Socket type
-    sta     socket_state,x     ;
+    lda     RES                ; Get Domain
+    sta     socket_domain,x    ; Save domain
     ; X contains the id of the socket here
-    stx     RES               ; Save socket_id
     pha
-    tya
-    sta     socket_domain,x             ; Save
+    tya     ; Y contains SOCK_STREAM etc
+    sta     socket_state,x             ; Contains SOCK_STREAM etc
     pla
+    stx     RES ; Save socket id
 
     cpy     #SOCK_RAW
-    beq     @not_ip_raw
+    beq     @is_ip_raw
+
+    ; FIXME here fix ipraw
 
 @not_ip_raw:
-    tax     ; Contains TCP/UDP type
-    lda     RES ; Get socket id
+    txa     ; contains socket id (X) Transfer to A
+
+    sty     RES+1 ; save SOCK_STEAM etc
+    ldx     RES+1
     jsr     ch395_set_proto_type_sn
     jmp     @exit_socket
 
-    ; At this step A=id_socket
+@is_ip_raw:
+    txa
     ldx     #CH395_PROTO_TYPE_IP_RAW
     jsr     ch395_set_ipraw_pro_sn
 
@@ -89,9 +94,6 @@ socketfound:
 
 socket_state:
     .byt 0,0,0,0,0,0,0,0
-
-socket_protocol:
-    .res NETWORK_MAX_SOCKET
 
 socket_domain:
     .res NETWORK_MAX_SOCKET
