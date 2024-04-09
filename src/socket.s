@@ -62,10 +62,10 @@ socketfound:
     lda     RES                ; Get Domain
     sta     socket_domain,x    ; Save domain
     ; X contains the id of the socket here
-    pha
+
     tya     ; Y contains SOCK_STREAM etc
     sta     socket_state,x             ; Contains SOCK_STREAM etc
-    pla
+
     stx     RES ; Save socket id
 
     cpy     #SOCK_RAW
