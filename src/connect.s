@@ -58,6 +58,15 @@
     lda     TR0
     jsr     ch395_set_sour_port_sn ; Use RES
 
+    lda     TR0
+    jsr     ch395_get_socket_status_sn
+    cmp     #CH395_SOCKET_CLOSED
+    beq     @start_open_socket
+
+    lda     TR0
+    jsr     ch395_close_socket_sn
+
+@start_open_socket:
     ; Waiting status
     ldx     #$00
 
@@ -66,18 +75,10 @@
     lda     TR0
     jsr     ch395_get_socket_status_sn
 
-    cmp     #CH395_SOCKET_CLOSED
-    beq     @opened_socket
+    cmp     #CH395_SOCKET_OPEN
+    beq     @continue
     ; at this step, if it's opened
     ; let's close
-    lda     TR0
-    jsr     ch395_close_socket_sn
-
-
-@opened_socket:
-    ; open socket
-    lda     TR0
-    jsr     ch395_open_socket_sn
 
 @waiting:
     ldx     save_x
@@ -91,8 +92,7 @@
     lda     #SOCKET_ERROR ; return error
     rts
 
-@socket_used:
-    jmp     @exit_near
+
 
 @exit_busy:
     ; Busy
