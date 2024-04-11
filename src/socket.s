@@ -76,7 +76,7 @@ socketfound:
 @not_ip_raw:
     txa     ; contains socket id (X) Transfer to A
 
-    sty     RES+1 ; save SOCK_STEAM etc
+    sty     RES+1 ; save SOCK_STREAM etc
     ldx     RES+1
     jsr     ch395_set_proto_type_sn
     jmp     @exit_socket

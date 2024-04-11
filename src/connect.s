@@ -44,6 +44,7 @@
     sta     TR0
     jsr     ch395_set_ip_addr_sn ; Warn Use RES
 
+    lda     TR0
     ldx     RESB
     ldy     RESB+1
     jsr     ch395_set_des_port_sn
