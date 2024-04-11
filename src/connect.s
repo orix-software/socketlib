@@ -15,6 +15,7 @@
 .import ch395_set_sour_port_sn
 .import ch395_set_des_port_sn
 .import ch395_set_ip_addr_sn
+.import ch395_close_socket_sn
 
 .import socket_state
 .import socket_sour_port
@@ -65,12 +66,15 @@
     lda     TR0
     jsr     ch395_get_socket_status_sn
 
-    cmp     #CH395_SOCKET_OPEN
-    beq     @continue
+    cmp     #CH395_SOCKET_CLOSED
+    beq     @opened_socket
+    ; at this step, if it's opened
+    ; let's close
+    lda     TR0
+    jsr     ch395_close_socket_sn
 
-    cmp     #CH395_ERR_BUSY
-    beq     @exit_busy
 
+@opened_socket:
     ; open socket
     lda     TR0
     jsr     ch395_open_socket_sn
@@ -80,7 +84,7 @@
     inx
     cpx     #100
     beq     @exit_near
-    jmp     @waiting_for_socket
+    bne     @waiting_for_socket
 
 @exit_near:
     ; Not connected
