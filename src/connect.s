@@ -45,7 +45,6 @@
     sta     TR0
     jsr     ch395_set_ip_addr_sn ; Warn Use RES
 
-    lda     TR0
     ldx     RESB
     ldy     RESB+1
     jsr     ch395_set_des_port_sn
@@ -60,13 +59,15 @@
 
     lda     TR0
     jsr     ch395_get_socket_status_sn
-    cmp     #CH395_SOCKET_CLOSED
-    beq     @start_open_socket
+
+    cmp     #CH395_SOCKET_OPEN
+    bne     @open_socket
 
     lda     TR0
     jsr     ch395_close_socket_sn
 
-@start_open_socket:
+
+@open_socket:
     ; Waiting status
     ldx     #$00
 
@@ -77,27 +78,28 @@
 
     cmp     #CH395_SOCKET_OPEN
     beq     @continue
-    ; at this step, if it's opened
-    ; let's close
+
+
+    ; open socket
+    lda     TR0
+    jsr     ch395_open_socket_sn
 
 @waiting:
     ldx     save_x
     inx
     cpx     #100
     beq     @exit_near
-    bne     @waiting_for_socket
+    jmp     @waiting_for_socket
 
 @exit_near:
     ; Not connected
     lda     #SOCKET_ERROR ; return error
     rts
 
+@socket_used:
+    jmp     @exit_near
 
 
-@exit_busy:
-    ; Busy
-    lda     #SOCKET_ERROR
-    rts
 
 @exit:
     rts
