@@ -14,24 +14,27 @@
 .proc send
     ;;@brief Send data into socket
     ;;@inputA Socket id
-    ;;@inputY Low ptr of the buffer
-    ;;@inputX High ptr of the buffer
-    ;;@inputMEM_RES Size of the bufer to send
+    ;;@inputY Low length
+    ;;@inputX High length
+    ;;@inputMEM_RES ptr
     ;;@returnsA Error type
 
 
-    ;;@```ca65
-    ;;@`; Use SENDTO macro
-    ;;@`  SENDTO current_socket, str_password, 11
-    ;;@```  rts
 
-    sta     save_socket_id
-    sty     RESB
-    stx     RESB+1
 
-    ldy     RES
-    ldx     RES+1
-    lda     save_socket_id ; socket 0
+    ;; ch395_write_send_buf_sn
+    ;;inputA Socket ID
+    ;;inputY Low length
+    ;;inputX High length
+    ;;inputMEM Ptr of the data to send
+    ;;inputMEM_RESB Adress ptr to read
+    ;;modifyMEM_RES Tmp
+
+
+
+
+
+    ; A contains socket id
     jsr     ch395_write_send_buf_sn
 
     ldx     #$00

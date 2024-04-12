@@ -95,6 +95,10 @@ socketfound:
 socket_state:
     .byt 0,0,0,0,0,0,0,0
 
+; Store pid of the program
+socket_pid:
+    .byt 0,0,0,0,0,0,0,0
+
 socket_domain:
     .res NETWORK_MAX_SOCKET
 
