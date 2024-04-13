@@ -14,8 +14,8 @@
 .proc recv
     ;;@brief Get socket data
     ;;@inputA Socket id
-    ;;@inputX Low ptr to store the buffer
-    ;;@inputY High ptr to store the buffer
+    ;;@inputY Low ptr to store the buffer
+    ;;@inputX High ptr to store the buffer
     ;;@modifyMEM_RES
     ;;@returnsA Error type
     ;;@returnsX Low length

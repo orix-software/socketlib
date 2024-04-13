@@ -19,21 +19,6 @@
     ;;@inputMEM_RES ptr
     ;;@returnsA Error type
 
-
-
-
-    ;; ch395_write_send_buf_sn
-    ;;inputA Socket ID
-    ;;inputY Low length
-    ;;inputX High length
-    ;;inputMEM Ptr of the data to send
-    ;;inputMEM_RESB Adress ptr to read
-    ;;modifyMEM_RES Tmp
-
-
-
-
-
     ; A contains socket id
     jsr     ch395_write_send_buf_sn
 
