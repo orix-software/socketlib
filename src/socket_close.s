@@ -3,7 +3,7 @@
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"
 
-SOCKET_CLOSE_DEBUG=1
+SOCKET_CLOSE_DEBUG=0
 
 .export socket_close
 

@@ -35,7 +35,6 @@
     stx     save_x
 
     jsr     ch395_get_glob_int_status
-
     and     socket_test
     cmp     socket_test
     beq     @read_buffer
@@ -97,9 +96,7 @@
 
 @read_buffer_here:
     lda     save_socket_id ; socket 0
-    jsr     ch395_get_recv_len_sn
-    sta     $7000
-    stx     $7001
+    jsr     ch395_get_recv_len_sn ; Modify A and X
 
 @store:
     cmp     #$00
@@ -112,13 +109,10 @@
     sta     length_receveived
     stx     length_receveived+1
 
-
     ; Read buffer
     lda     save_socket_id ; socket 0
     ldy     length_receveived
     ldx     length_receveived+1
-
-
     jsr     ch395_read_recv_buf_sn
 
     ldy     length_receveived
