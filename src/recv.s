@@ -41,6 +41,17 @@
     beq     @read_buffer
 
     ldy      #$00
+    ; Use DELAY_100US command (fixme)from ch376
+; This command is used to delay for 100uS and does not support serial port mode. The output data is 0 during 
+; delay, and is non-0 (usually the chip version number) at the end of the delay. MCU determines whether the 
+; delay is ended according to the read data.
+
+;     lda     #CH376_DELAY_100US
+;     sta     CH376_COMMAND
+
+; @loop_wait:
+;     lda     CH376_DATA
+;     beq     @loop_wait
 
 @wait:
     nop
@@ -74,8 +85,6 @@
     bne     @read_bytes_test
     jmp     @exit_get
 
-    rts
-
 @read_buffer:
     lda     save_socket_id                  ; Set socket
     jsr     ch395_get_int_status_sn         ; Get global IRQ
@@ -89,6 +98,8 @@
 @read_buffer_here:
     lda     save_socket_id ; socket 0
     jsr     ch395_get_recv_len_sn
+    sta     $7000
+    stx     $7001
 
 @store:
     cmp     #$00
@@ -103,11 +114,11 @@
 
 
     ; Read buffer
-
-    ldx     length_receveived+1
-    ldy     length_receveived
-
     lda     save_socket_id ; socket 0
+    ldy     length_receveived
+    ldx     length_receveived+1
+
+
     jsr     ch395_read_recv_buf_sn
 
     ldy     length_receveived
