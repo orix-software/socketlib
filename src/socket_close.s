@@ -2,8 +2,8 @@
 .include "../dependencies/orix-sdk/macros/SDK_print.mac"
 .include "../dependencies/orix-sdk/macros/SDK_conio.mac"
 .include "telestrat.inc"
-
-SOCKET_CLOSE_DEBUG=0
+.include "ch395.inc"
+.include "socket.inc"
 
 .export socket_close
 
@@ -12,6 +12,7 @@ SOCKET_CLOSE_DEBUG=0
 .import ch395_get_socket_status_sn
 .import socket_state
 .import ch395_clear_recv_buf_sn
+.import ch395_tcp_disconnect_sn
 
 .proc socket_close
     ;;@brief Close socket
@@ -32,7 +33,6 @@ SOCKET_CLOSE_DEBUG=0
     txa
     ; Flush buffers
     pha
-    lda     curl_current_socket
     jsr     ch395_clear_recv_buf_sn
     ; Close socket
     pla
