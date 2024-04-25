@@ -2,5 +2,5 @@
 .import socket_close
 
 .proc _socket_close
-   rts
+   jmp      socket_close
 .endproc

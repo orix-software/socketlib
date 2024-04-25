@@ -45,9 +45,10 @@
 
     ldx     #$00
 
+@search_another_socket:
 @L1:
     lda     socket_state,x
-    beq     socketfound
+    beq     @socketfound
     inx
     cpx     #NETWORK_MAX_SOCKET
     bne     @L1
@@ -56,9 +57,22 @@
     lda     #INVALID_SOCKET
     rts
 
-socketfound:
+@socketfound:
     ; X contains the id of the socket
     ;
+    ; We are looking if the state of the socket is still established (Because when it's closed,
+    ; there is some delay if delay ti close tcp socket
+
+    txa
+    pha
+    jsr     CMD_GET_SOCKET_STATUS_SN
+    cmp     #CH395_SOCKET_CLOSED
+    bne     @search_another_socket
+
+    pla
+    tax
+
+
     lda     RES                ; Get Domain
     sta     socket_domain,x    ; Save domain
     ; X contains the id of the socket here

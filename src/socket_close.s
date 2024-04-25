@@ -18,23 +18,18 @@
     ;;@brief Close socket
     ;;@inputX The socket id
 
-    lda     socket_state,x
-    cmp     #SOCK_STREAM
-    bne     @is_not_tcp_connexion
+    ;CMD_CLOSE_SOCKET_SN
+    ;This command is used to close Socket. It is necessary to input a 1 byte of Socket index value. After Socket is
+    ;closed, the receive buffer and transmit buffer of Socket are emptied, but the configuration information is still
+    ;reserved, and you just need to open the Socket again when using the Socket the next time.
+    ;In TCP mode, CH395 will automatically disconnect TCP before turning off Socket
 
-    txa
-    jsr     ch395_tcp_disconnect_sn ; Modify Y and A in v2024.2 ch395 lib
-
-@is_not_tcp_connexion:
     lda     #$00
     sta     socket_state,x
 
     txa
     ; Flush buffers
-    pha
-    jsr     ch395_clear_recv_buf_sn
-    ; Close socket
-    pla
+
     jsr     ch395_close_socket_sn
 
     rts

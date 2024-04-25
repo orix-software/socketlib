@@ -36,7 +36,5 @@
     lda     #$00
     ldy     RES+1
 
-    jsr     socket
-    ldx     #$00
-    rts
+    jmp     socket
 .endproc
