@@ -65,12 +65,16 @@
     ; there is some delay if delay ti close tcp socket
 
     txa
-    pha
+    tay ; Save in Y
+
+@waiting_for_closing:
+    tya
     jsr     ch395_get_socket_status_sn
     cmp     #CH395_SOCKET_CLOSED
-    bne     @search_another_socket
+    bne     @waiting_for_closing
 
-    pla
+    ; Restore
+    tya
     tax
 
 
