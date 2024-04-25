@@ -10,6 +10,7 @@
 
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
+.import ch395_get_socket_status_sn
 
 .export socket_state
 .export socket_sour_port
@@ -65,7 +66,7 @@
 
     txa
     pha
-    jsr     CMD_GET_SOCKET_STATUS_SN
+    jsr     ch395_get_socket_status_sn
     cmp     #CH395_SOCKET_CLOSED
     bne     @search_another_socket
 
