@@ -65,25 +65,25 @@
     ; We are looking if the state of the socket is still established (Because when it's closed,
     ; there is some delay if delay ti close tcp socket
 
-    txa
-    tay ; Save in Y
+;     txa
+;     tay ; Save in Y
 
-@waiting_for_closing:
-    tya
-    jsr     ch395_get_socket_status_sn
-    cmp     #CH395_SOCKET_CLOSED
-    beq     @continue
+; @waiting_for_closing:
+;     tya
+;     jsr     ch395_get_socket_status_sn
+;     cmp     #CH395_SOCKET_CLOSED
+;     beq     @continue
 
-    tya
-    tax
-    jsr ch395_close_socket_sn
-    tay
-    jmp     @waiting_for_closing
+;     tya
+;     tax
+;     jsr     ch395_close_socket_sn
+;     tay
+;     jmp     @waiting_for_closing
 
-@continue:
-    ; Restore
-    tya
-    tax
+; @continue:
+;     ; Restore
+;     tya
+;     tax
 
 
     lda     RES                ; Get Domain
