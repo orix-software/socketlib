@@ -19,7 +19,7 @@
     ;;@inputX The socket id
 
     lda     socket_state,x
-    cmp     #SOCK_DGRAM
+    cmp     #SOCK_STREAM
     bne     @is_not_tcp_connexion
 
     txa
@@ -28,7 +28,6 @@
 @is_not_tcp_connexion:
     lda     #$00
     sta     socket_state,x
-
 
     txa
     ; Flush buffers
