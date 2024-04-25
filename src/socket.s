@@ -11,6 +11,7 @@
 .import ch395_set_ipraw_pro_sn
 .import ch395_set_proto_type_sn
 .import ch395_get_socket_status_sn
+.import ch395_close_socket_sn
 
 .export socket_state
 .export socket_sour_port
@@ -71,8 +72,15 @@
     tya
     jsr     ch395_get_socket_status_sn
     cmp     #CH395_SOCKET_CLOSED
-    bne     @waiting_for_closing
+    beq     @continue
 
+    tya
+    tax
+    jsr ch395_close_socket_sn
+    tay
+    jmp     @waiting_for_closing
+
+@continue:
     ; Restore
     tya
     tax
