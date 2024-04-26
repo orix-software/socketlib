@@ -15,7 +15,6 @@
 
 .export socket_state
 .export socket_sour_port
-.export socket_sour_pos
 
 
 .proc socket
@@ -135,8 +134,6 @@ socket_domain:
 ; Define source port to use to connect to dest port
 ; The first byte define the source port for socket 0
 socket_sour_port:
-    .byt 170,171,172,173,174,175,176,177
-    .byt 178,179,180,181,182,183,184,185
+    .byt 170
 
-socket_sour_pos:
-    .byte 0
+
