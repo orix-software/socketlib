@@ -19,6 +19,7 @@
 
 .import socket_state
 .import socket_sour_port
+.import socket_sour_pos
 
 .proc connect
     ;;@brief Perform connect to socket. Returns socket error if something is wrong
@@ -51,7 +52,15 @@
     jsr     ch395_set_des_port_sn
 
     ; source port
-    ldx     TR0
+    ;ldx     TR0
+    ldx     socket_sour_pos
+    cpx     #16
+    bne     @do_not_rotate_src_port
+    lda     #$00
+    sta     socket_sour_pos
+
+@do_not_rotate_src_port:
+    inc     socket_sour_pos
     lda     socket_sour_port,x ; Get source port mapping
     tay
     ldx     #$00
