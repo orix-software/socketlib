@@ -54,12 +54,12 @@
 
     ; Rotate source port
 
-    ldy     $309 ; Get source port mapping
+    ldy     $24D ; Get source port mapping
     ;tay
     ldx     #$00
     lda     TR0
     jsr     ch395_set_sour_port_sn ; Use RES
-    inc     socket_sour_port
+    inc     $24D
 
 
     lda     TR0
