@@ -17,7 +17,7 @@
     ;;@inputY Low ptr to store the buffer
     ;;@inputX High ptr to store the buffer
     ;;@modifyMEM_RES
-    ;;@returnsA Error type
+    ;;@returnsA Error type. If A = EOK then something had been received
     ;;@returnsX Low length
     ;;@returnsY High length
     sta     save_socket_id
@@ -82,7 +82,11 @@
     inx
     cpx     #255                            ; Ne pas faire moins car l'interruption peut mettre du temps
     bne     @read_bytes_test
-    jmp     @exit_get
+    ; Timeout
+    lda     #ETIMEDOUT
+    ldx     #$00
+
+    rts
 
 @read_buffer:
     lda     save_socket_id                  ; Set socket
@@ -139,17 +143,6 @@ save_x:
 
 save_socket_id:
     .res 1
-
-.ifdef SOCKET_DEBUG
-str_debug_socket_recv:
-    .asciiz "[libsocket/socket_recv.s] "
-
-str_debug_socket_recv_waiting_buffer:
-    .asciiz "Waiting recv buffer ... "
-
-str_debug_socket_recv_received_buffer:
-    .asciiz "Received recv buffer bytes : "
-.endif
 
 .endproc
 
