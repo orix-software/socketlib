@@ -41,16 +41,16 @@
 
     ldy      #$00
     ; Use DELAY_100US command (fixme)from ch376
-; This command is used to delay for 100uS and does not support serial port mode. The output data is 0 during 
-; delay, and is non-0 (usually the chip version number) at the end of the delay. MCU determines whether the 
-; delay is ended according to the read data.
+    ; This command is used to delay for 100uS and does not support serial port mode. The output data is 0 during
+    ; delay, and is non-0 (usually the chip version number) at the end of the delay. MCU determines whether the
+    ; delay is ended according to the read data.
 
-;     lda     #CH376_DELAY_100US
-;     sta     CH376_COMMAND
+    ;     lda     #CH376_DELAY_100US
+    ;     sta     CH376_COMMAND
 
-; @loop_wait:
-;     lda     CH376_DATA
-;     beq     @loop_wait
+    ; @loop_wait:
+    ;     lda     CH376_DATA
+    ;     beq     @loop_wait
 
 @wait:
     nop
