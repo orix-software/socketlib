@@ -151,7 +151,7 @@ jobs:
             bpm  --force-update  -V
             bpm  --force-update  -V
             echo Using bpm ...
-            bpm --force-update plugins install orixsdk
+            bpm --force-update plugins install orixsdk --replace-for-new-project
             bpm --force-update build
           else
             CC65_HOME=${GITHUB_WORKSPACE}/../cc65 make

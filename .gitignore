@@ -3,3 +3,6 @@
 build/
 libs/
 orixlibs/
+*.tgz
+bpmtmp/
+test/

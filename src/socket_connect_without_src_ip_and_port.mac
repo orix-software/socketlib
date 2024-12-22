@@ -1,9 +1,0 @@
-.macro socket_connect_without_src_ip_and_port ip_dest
-    pha ; Save socket id
-    ldy     #<ip_dest
-    ldx     #>ip_dest
-
-    jsr     _ch395_set_ip_addr_sn
-    pla
-    jsr     socket_open_test
-.endmacro

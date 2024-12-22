@@ -1,0 +1,68 @@
+
+.define KERNEL_SOCKET_NETWORK            $05
+.define KERNEL_BIND_NETWORK              $06
+.define KERNEL_CONNECT_NETWORK           $07
+.define KERNEL_RECV_NETWORK              $08
+.define KERNEL_SEND_NETWORK              $09
+.define KERNEL_SOCKET_CLOSE_NETWORK      $0A
+
+.macro SOCKET domain, type, protocol
+    lda     #$00
+    ldx     #domain
+    ldy     #type
+
+    lda     #KERNEL_SOCKET_NETWORK
+    BRK_TELEMON $01
+.endmacro
+
+
+;int connect(int sockfd, const struct sockaddr *serv_addr,
+;            socklen_t addrlen);
+.macro CONNECT socket, ip, dest_port
+    lda     #>dest_port  ; Port 80
+    sta     RESB
+    lda     #<dest_port ; Port ie 80
+    sta     RESB+1
+    lda     socket
+    sta     TR0
+    ldy     #<ip
+    ldx     #>ip
+    lda     #KERNEL_CONNECT_NETWORK ; Connect
+    BRK_TELEMON $01
+.endmacro
+
+.macro SEND socket, buffer, length
+    lda     socket
+    sta     TR0
+    ; Set length
+    lda     #<buffer
+    sta     RES
+    lda     #>buffer
+    sta     RES + 1
+    ldy     #<length
+    ldx     #>length
+
+    lda     #KERNEL_SEND_NETWORK ; Connect
+    BRK_TELEMON $01
+.endmacro
+
+.macro RECV socket, buffer, length
+    lda     socket
+    sta     TR0
+
+    ldy     buffer
+    ldx     buffer+1
+    lda     #KERNEL_RECV_NETWORK
+    BRK_TELEMON $01
+    ;ldy     length_receveived
+    ;ldx     length_receveived+1
+
+    ;lda     #EOK
+.endmacro
+
+.macro CLOSE_SOCKET socket
+    lda     socket
+    sta     TR0
+    lda     #KERNEL_SOCKET_CLOSE_NETWORK
+    BRK_TELEMON $01
+.endmacro

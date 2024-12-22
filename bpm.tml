@@ -1,6 +1,6 @@
 [package]
 name = "socket"
-version = "2024.4"
+version = "2025.1"
 authors = [ "nobody@nobody.fr",]
 license = "MIT OR Apache-2.0"
 edition = "2018"
@@ -14,6 +14,7 @@ buildfolder = "build"
 packagetype = "tgz"
 codetype = "lib"
 oricutron_replace_autoboot_run = "True"
+templatecode = ""
 
 [dependencies]
 inet = "2024.4"

@@ -1,17 +1,19 @@
 .include "telestrat.inc"
+.include "socket.mac"
 
 .export _send
-.import send
 
 .import popax
 .import popa
 
-.importzp ptr1
+.importzp ptr1, tmp0
 
 .proc _send
     ;;@proto unsigned int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
     ;; send(sock, request, strlen(request), 0) == -1)
-
+    socket := tmp0
+    buffer := ptr1
+    length := RES
     ; Don't use flags
 
     ; Get length
@@ -22,19 +24,11 @@
     ; get buf ptr
     jsr     popax
     sta     ptr1
-    stx     ptr1
+    stx     ptr1+1
 
     jsr     popa ; Get socket id
+    sta     socket
 
 
-    ldy     ptr1
-    ldx     ptr1
-    ;;@brief Send data into socket
-    ;;@inputA Socket id
-    ;;@inputY Low ptr of the buffer
-    ;;@inputX High ptr of the buffer
-    ;;inputMEM_RES Size of the bufer to send
-
-
-    jmp     send
+    SEND socket, buffer, length
 .endproc

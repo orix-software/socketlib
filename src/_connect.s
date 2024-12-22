@@ -1,18 +1,22 @@
-.include "socket.inc"
-.include "telestrat.inc"
 .include "ch395.inc"
+.include "socket.inc"
+.include "socket.mac"
+.include "telestrat.inc"
+
 
 .export _connect
-.import connect
 
 .import popax
 .import popa
 
-.importzp ptr1,ptr2
+.importzp ptr1,ptr2, tmp0
 
 .proc _connect
     ; connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1
     ; A and X contains the size
+    dest_port := RESB
+    ip        := ptr2
+    socket    := tmp0
 
     jsr     popax ; Get ptr server addr
     sta     ptr1
@@ -46,15 +50,9 @@
 
     ; Get sockfd
     jsr     popa
+    sta     socket
 
-    ;;@inputA Socket id
-    ;;@inputY Low ip dest
-    ;;@inputX High ip dest
-    ;;@inputMEM_RESB Low/high dest port
 
-    ldy     ptr2
-    ldx     ptr2+1
-
-    jmp     connect
-
+    CONNECT socket, ip, dest_port
+    rts
 .endproc
