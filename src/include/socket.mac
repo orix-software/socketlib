@@ -8,25 +8,24 @@
 
 .macro SOCKET domain, type, protocol
     lda     #$00
-    ldx     #domain
-    ldy     #type
+    ldx     domain
+    ldy     type
 
     lda     #KERNEL_SOCKET_NETWORK
     BRK_TELEMON $01
 .endmacro
 
-
 ;int connect(int sockfd, const struct sockaddr *serv_addr,
 ;            socklen_t addrlen);
 .macro CONNECT socket, ip, dest_port
-    lda     #>dest_port  ; Port 80
+    lda     dest_port  ; Port 80
     sta     RESB
-    lda     #<dest_port ; Port ie 80
-    sta     RESB+1
+    lda     dest_port+1 ; Port ie 80
+    sta     RESB + 1
     lda     socket
     sta     TR0
-    ldy     #<ip
-    ldx     #>ip
+    ldy     ip
+    ldx     ip + 1
     lda     #KERNEL_CONNECT_NETWORK ; Connect
     BRK_TELEMON $01
 .endmacro
@@ -34,13 +33,15 @@
 .macro SEND socket, buffer, length
     lda     socket
     sta     TR0
-    ; Set length
-    lda     #<buffer
+    ; Set buffer
+    lda     buffer
     sta     RES
-    lda     #>buffer
+
+    lda     buffer + 1
     sta     RES + 1
-    ldy     #<length
-    ldx     #>length
+    ; Set length
+    ldy     length     ; Low
+    ldx     length + 1 ; High
 
     lda     #KERNEL_SEND_NETWORK ; Connect
     BRK_TELEMON $01
@@ -52,6 +53,18 @@
 
     ldy     buffer
     ldx     buffer+1
+    ;;@brief Get socket data RES contains the buffer but it's modifyed. Keep ptr 
+    ;;@inputTR0 Socket id
+    ;;@inputY Low ptr to store the buffer
+    ;;@inputX High ptr to store the buffer
+    ;;@modifyMEM_RES
+    ;;@modifyMEM_RESB
+    ;;@modifyMEM_TR1
+    ;;@modifyMEM_TR2
+    ;;@returnsA Error type. If A = EOK then something had been received
+    ;;@returnsX Low length
+    ;;@returnsY High length
+
     lda     #KERNEL_RECV_NETWORK
     BRK_TELEMON $01
     ;ldy     length_receveived

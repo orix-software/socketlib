@@ -3,10 +3,10 @@
 
 .export _socket_close
 
-.importzp tmp0
+.importzp tmp1
 
 .proc _socket_close
-   socket := tmp0
+   socket := tmp1
 
    sta      socket
    CLOSE_SOCKET socket

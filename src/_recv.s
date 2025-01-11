@@ -1,28 +1,33 @@
 .include "telestrat.inc"
 .include "socket.mac"
 
-
 .export _recv
 
 
 .import popax
 .import popa
 
-.importzp ptr1, ptr2, tmp0
+.importzp ptr1, ptr2, tmp1, tmp2
 
 .proc _recv
     ;;@proto int recv(unsigned char s, void *buf, unsigned char len, unsigned char flags);
+    ;;@brief Does not handle flags
     length := ptr2
     buffer := ptr1
-    socket := tmp0
+    socket := tmp1
+    flags := tmp2
     ; Drop flag
-    jsr     popax ; Get length
-    sta     ptr2
-    stx     ptr2 + 1
 
+    sta     flags ; Flags stored but not managed
+
+    jsr     popax ; Get length
+    sta     length
+    stx     length + 1
+
+    ; Get buffer
     jsr     popax ; Get ptr
-    sta     ptr1
-    stx     ptr1 + 1
+    sta     buffer
+    stx     buffer + 1
 
     jsr     popa  ; Get socket id
     sta     socket

@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include "socket.h"
-#include <arpa/inet.h>
-#include "arpa/inetextend.h"
+#include "../src/include/socket.h"
+//#include "arpa/inet.h"
+//#include "arpa/inetextend.h"
 
 #define BUFFER_SIZE 1024
 
@@ -42,17 +42,17 @@ int main(int argc, char *argv[]) {
 
     //server_addr.sin_addr[3] = 192;
 
-    if (inet_aton("192.168.1.77", &server_addr.sin_addr) <= 0) {
-          printf("Adresse invalide\n");
-          return 1;
-    }
+    // if (inet_aton("192.168.1.77", &server_addr.sin_addr) <= 0) {
+    //       printf("Adresse invalide\n");
+    //       return 1;
+    // }
 
     // // uint8_t octet1 = (entier >> 24) & 0xFF;
     // // uint8_t octet2 = (entier >> 16) & 0xFF;
     // // uint8_t octet3 = (entier >> 8) & 0xFF;
     // // uint8_t octet4 = entier & 0xFF;
 
-    printf("IP : %d.%d.%d.%d",(server_addr.sin_addr >> 24) & 0xFF, (server_addr.sin_addr >> 16) & 0xFF, (server_addr.sin_addr >> 8) & 0xFF, server_addr.sin_addr & 0xFF);
+    // printf("IP : %d.%d.%d.%d",(server_addr.sin_addr >> 24) & 0xFF, (server_addr.sin_addr >> 16) & 0xFF, (server_addr.sin_addr >> 8) & 0xFF, server_addr.sin_addr & 0xFF);
 
     // // Connexion au serveur
     // if (connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {

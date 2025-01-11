@@ -10,15 +10,22 @@
 #define SOCK_SEQPACKET 5	/* sequential packet socket	*/
 #define SOCK_PACKET    10	/* linux specific way of	*/
 
+struct in_addr {
+    long s_addr; // Adresse IPv4 en format binaire (big-endian)
+};
+
+
+//server.sin_addr.s_addr = inet_addr("192.168.177"); // Exemple IP (www.example.com)
 struct sockaddr_in {
    unsigned char sin_family;   // e.g. AF_INET
+   struct in_addr sin_addr;    // Adresse IPv4
    unsigned int  sin_port;     // e.g. htons(3490)
-   unsigned long sin_addr;     // see struct in_addr, below
+   //unsigned long sin_addr;     // see struct in_addr, below
 };
 
 struct sockaddr {
    unsigned char sa_family;      /* Address family */
-   char            sa_data[];      /* Socket address */
+   char          sa_data[];      /* Socket address */
 };
 
 /* Create a new socket of type TYPE in domain DOMAIN, using
@@ -35,4 +42,4 @@ unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsi
 
 unsigned int socket_close(unsigned char sockfd);
 
-int connect(unsigned int sockfd, const struct sockaddr *addr, unsigned int addrlen);
+int connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addrlen);

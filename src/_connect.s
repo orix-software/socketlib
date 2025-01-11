@@ -9,21 +9,27 @@
 .import popax
 .import popa
 
-.importzp ptr1,ptr2, tmp0
+.importzp ptr1, ptr2, ptr3, tmp1
 
 .proc _connect
     ; connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1
     ; A and X contains the size
     dest_port := RESB
     ip        := ptr2
-    socket    := tmp0
+    socket    := tmp1
+
+    ; store struct size but, it's not used
+    sta     ptr3
+    stx     ptr3 + 1
 
     jsr     popax ; Get ptr server addr
-    sta     ptr1
-    sta     ptr2
 
-    stx     ptr1+1
-    stx     ptr2+1 ; For next compute below
+
+    sta     ptr1
+    stx     ptr1 + 1
+
+    sta     ptr2
+    stx     ptr2 + 1 ; For next compute below
 
 ; .struct sockaddr_in
 ;    sin_family .byte ; e.g. AF_INET
@@ -36,7 +42,9 @@
     sta     RESB
     iny
     lda     (ptr1),y
-    sta     RESB+1
+    sta     RESB + 1
+
+
 
     ; Compute ip addr ptr
     lda     #sockaddr_in::sin_addr
