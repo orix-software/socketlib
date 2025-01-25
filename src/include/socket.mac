@@ -74,8 +74,7 @@
 .endmacro
 
 .macro CLOSE_SOCKET socket
-    lda     socket
-    sta     TR0
+    ldx     socket
     lda     #KERNEL_SOCKET_CLOSE_NETWORK
     BRK_TELEMON $01
 .endmacro

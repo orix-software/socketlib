@@ -42,4 +42,4 @@ unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsi
 
 unsigned int socket_close(unsigned char sockfd);
 
-int connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addrlen);
+unsigned char connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addrlen);

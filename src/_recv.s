@@ -10,7 +10,7 @@
 .importzp ptr1, ptr2, tmp1, tmp2
 
 .proc _recv
-    ;;@proto int recv(unsigned char s, void *buf, unsigned char len, unsigned char flags);
+    ;;@proto int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
     ;;@brief Does not handle flags
     length := ptr2
     buffer := ptr1

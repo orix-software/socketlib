@@ -26,6 +26,7 @@
     sta     domain
 
     SOCKET domain, type, protocol
+
     rts
 
 .endproc

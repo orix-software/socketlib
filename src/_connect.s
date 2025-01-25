@@ -60,7 +60,7 @@
     jsr     popa
     sta     socket
 
-
     CONNECT socket, ip, dest_port
+
     rts
 .endproc

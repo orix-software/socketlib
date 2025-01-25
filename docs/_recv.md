@@ -1,4 +1,4 @@
-## int recv(unsigned char s, void *buf, unsigned char len, unsigned char flags);
+## int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
 ***Description***
 
 Does not handle flags

@@ -148,7 +148,7 @@ jobs:
             chmod 755 ../bpm/src/bpm
             echo "/home/runner/work/file/cc65/bin" >> $GITHUB_PATH
             echo "Bpm version :"
-            bpm --force-update plugins install orixsdk --replace-for-new-project
+            bpm --force-update --replace-for-new-project
             echo Using bpm ...
             bpm --force-update build
           else
