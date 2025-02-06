@@ -1,6 +1,6 @@
 [package]
 name = "socket"
-version = "2025.1"
+version = "2025.2"
 authors = [ "nobody@nobody.fr",]
 license = "MIT OR Apache-2.0"
 edition = "2018"

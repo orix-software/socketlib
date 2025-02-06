@@ -1,5 +1,5 @@
 .include "telestrat.inc"
-.include "socket.mac"
+.include "sys/socket.mac"
 
 .export _recv
 
@@ -15,7 +15,7 @@
     length := ptr2
     buffer := ptr1
     socket := tmp1
-    flags := tmp2
+    flags  := tmp2
     ; Drop flag
 
     sta     flags ; Flags stored but not managed
@@ -37,13 +37,13 @@
     ;;@inputY High ptr to store the buffer
     ;;@modifyMEM_RES
 
-    ldy    ptr1
-    ldx    ptr1 + 1
+    ldy     buffer
+    ldx     buffer + 1
 
     RECV socket, buffer, length
     tya
-    stx     ptr1 + 1
-    ldy     ptr1 + 1
+    stx     buffer + 1
+    ldy     buffer + 1
 
     rts
 .endproc

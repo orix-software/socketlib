@@ -41,5 +41,4 @@ EHOSTUNREACH    = 65 ; No route to host
    ;struct in_addr sin_addr;    // Adresse IPv4
    sin_addr   .res 4  ;long sin_addr
    sin_port   .word   ; e.g. htons(3490)
-
 .endstruct

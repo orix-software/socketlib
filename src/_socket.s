@@ -1,4 +1,4 @@
-.include "include/socket.mac"
+.include "include/sys/socket.mac"
 .include "telestrat.inc"
 
 .export _socket

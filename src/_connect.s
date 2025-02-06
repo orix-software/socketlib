@@ -1,8 +1,7 @@
 .include "ch395.inc"
-.include "socket.inc"
-.include "socket.mac"
+.include "sys/socket.inc"
+.include "sys/socket.mac"
 .include "telestrat.inc"
-
 
 .export _connect
 
@@ -51,7 +50,7 @@
     clc
     adc     ptr2
     bcc     @S1
-    inc     ptr2+1
+    inc     ptr2 + 1
 
 @S1:
     sta     ptr2

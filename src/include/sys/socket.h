@@ -14,6 +14,8 @@ struct in_addr {
     long s_addr; // Adresse IPv4 en format binaire (big-endian)
 };
 
+typedef unsigned char socklen_t;
+
 
 //server.sin_addr.s_addr = inet_addr("192.168.177"); // Exemple IP (www.example.com)
 struct sockaddr_in {
@@ -25,7 +27,7 @@ struct sockaddr_in {
 
 struct sockaddr {
    unsigned char sa_family;      /* Address family */
-   char          sa_data[];      /* Socket address */
+   char          sa_data[14];      /* Socket address */
 };
 
 /* Create a new socket of type TYPE in domain DOMAIN, using
@@ -43,3 +45,6 @@ unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsi
 unsigned int socket_close(unsigned char sockfd);
 
 unsigned char connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addrlen);
+
+int recvfrom(unsigned char sockfd, void *buf, size_t len, unsigned char flags, struct sockaddr *src_addr, socklen_t *addrlen);
+int sendto(unsigned char sockfd, const void *buf, size_t len, unsigned char flags, const struct sockaddr *dest_addr, socklen_t addrlen);

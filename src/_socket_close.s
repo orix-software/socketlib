@@ -1,5 +1,5 @@
 .include "telestrat.inc"
-.include "socket.mac"
+.include "sys/socket.mac"
 
 .export _socket_close
 
