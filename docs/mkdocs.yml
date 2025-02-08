@@ -55,6 +55,9 @@ theme:
 nav:
     - Introduction: index.md
     - Versions:
+        - 2025.2:
+            - Assembly: 2025.2/assembly.md
+            - C: 2025.2/c.md
         - 2024.2:
             - Assembly: 2024.2/assembly.md
             - C: 2024.2/c.md
