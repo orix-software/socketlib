@@ -196,7 +196,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../2025.2/assembly.md" class="md-tabs__link">
+        <a href="../2025.2/assembly/" class="md-tabs__link">
           
   
   Versions
@@ -346,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2025.2/assembly.md" class="md-nav__link">
+      <a href="../2025.2/assembly/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -367,7 +367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2025.2/c.md" class="md-nav__link">
+      <a href="../2025.2/c/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -599,18 +599,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#int-recvunsigned-char-s-void-buf-unsigned-char-len-unsigned-char-flags" class="md-nav__link">
+  <a href="#int-recvunsigned-char-s-void-buf-unsigned-int-len-unsigned-char-flags" class="md-nav__link">
     <span class="md-ellipsis">
-      int recv(unsigned char s, void *buf, unsigned char len, unsigned char flags);
+      int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#unsigned-int-recvunsigned-char-s-void-buf-unsigned-int-len-unsigned-char-flags" class="md-nav__link">
+  <a href="#unsigned-int-sendunsigned-char-sockfd-const-void-buf-unsigned-int-len-unsigned-char-flags" class="md-nav__link">
     <span class="md-ellipsis">
-      unsigned int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
+      unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsigned char flags);
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#int-sendtounsigned-char-sockfd-const-void-buf-size_t-len-unsigned-char-flags-const-struct-sockaddr-dest_addr-socklen_t-addrlen" class="md-nav__link">
+    <span class="md-ellipsis">
+      int sendto(unsigned char sockfd, const void buf, size_t len, unsigned char flags, const struct sockaddr dest_addr, socklen_t addrlen);
     </span>
   </a>
   
@@ -641,23 +650,16 @@
 
 
 <div><h1 id="c">C</h1>
-<p><strong><em>Input</em></strong></p>
-<p><strong><em>Input</em></strong></p>
-<p><strong><em>Input</em></strong></p>
-<p><strong><em>Input</em></strong></p>
-<h2 id="int-recvunsigned-char-s-void-buf-unsigned-char-len-unsigned-char-flags">int recv(unsigned char s, void *buf, unsigned char len, unsigned char flags);</h2>
-<p><strong><em>Input</em></strong></p>
-<p><strong><em>Input</em></strong></p>
-<p><strong><em>Input</em></strong></p>
-<p>const char str_debug_socket_recv[27] = "[libsocket/socket_recv.s] ";
-const char str_debug_socket_recv_waiting_buffer[25] = "Waiting recv buffer ... ";
-const char str_debug_socket_recv_received_buffer[30] = "Received recv buffer bytes : ";</p>
-<h2 id="unsigned-int-recvunsigned-char-s-void-buf-unsigned-int-len-unsigned-char-flags">unsigned int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);</h2>
+<h2 id="int-recvunsigned-char-s-void-buf-unsigned-int-len-unsigned-char-flags">int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);</h2>
 <p><strong><em>Description</em></strong></p>
-<p>Send data into socket</p>
+<p>Does not handle flags</p>
 <p><strong><em>Input</em></strong></p>
 <p><strong><em>Input</em></strong></p>
 <p><strong><em>Input</em></strong></p>
+<h2 id="unsigned-int-sendunsigned-char-sockfd-const-void-buf-unsigned-int-len-unsigned-char-flags">unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsigned char flags);</h2>
+<p><strong><em>Description</em></strong></p>
+<p>Does not handle flags</p>
+<h2 id="int-sendtounsigned-char-sockfd-const-void-buf-size_t-len-unsigned-char-flags-const-struct-sockaddr-dest_addr-socklen_t-addrlen">int sendto(unsigned char sockfd, const void <em>buf, size_t len, unsigned char flags, const struct sockaddr </em>dest_addr, socklen_t addrlen);</h2>
 <p><strong><em>Description</em></strong></p>
 <p>Open a socket</p>
 <h2 id="unsigned-char-socket-unsigned-char-domain-unsigned-char-__type-unsigned-char-protocol">unsigned char socket (unsigned char domain, unsigned char __type, unsigned char protocol);</h2></div>

@@ -196,7 +196,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../2025.2/assembly.md" class="md-tabs__link">
+        <a href="../2025.2/assembly/" class="md-tabs__link">
           
   
   Versions
@@ -346,7 +346,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2025.2/assembly.md" class="md-nav__link">
+      <a href="../2025.2/assembly/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -367,7 +367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../2025.2/c.md" class="md-nav__link">
+      <a href="../2025.2/c/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -607,51 +607,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#connect" class="md-nav__link">
-    <span class="md-ellipsis">
-      connect
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#recv" class="md-nav__link">
-    <span class="md-ellipsis">
-      recv
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#send" class="md-nav__link">
-    <span class="md-ellipsis">
-      send
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#socket_close" class="md-nav__link">
-    <span class="md-ellipsis">
-      socket_close
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#socket" class="md-nav__link">
-    <span class="md-ellipsis">
-      socket
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -689,149 +644,38 @@
 <p>Y Register : XX </p>
 </li>
 </ul>
-<h2 id="connect">connect</h2>
-<p><strong><em>Description</em></strong></p>
-<p>Perform connect to socket. Returns socket error if something is wrong</p>
-<p><strong><em>Input</em></strong></p>
-<ul>
-<li>Accumulator : Socket id</li>
-<li>Y Register : Low ip dest</li>
-<li>X Register : High ip dest</li>
-<li>RESB : dest port value (16 bits)</li>
-</ul>
-<p><strong><em>Modify</em></strong></p>
-<ul>
-<li>TR0Used to save socket</li>
-<li>REStmp</li>
-</ul>
-<p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mi">00</span><span class="w"> </span><span class="c1">; Port 80</span>
-<span class="w"> </span><span class="k">sta</span><span class="w"> </span><span class="n">RESB</span>
-<span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mi">80</span><span class="w"> </span><span class="c1">; Port</span>
-<span class="w"> </span><span class="k">sta</span><span class="w"> </span><span class="n">RESB</span><span class="o">+</span><span class="mi">1</span>
-<span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mh">$00</span><span class="w"> </span><span class="c1">; Socket id</span>
-<span class="w"> </span><span class="k">ldy</span><span class="w"> </span><span class="p">#</span><span class="o">&lt;</span><span class="n">ip</span>
-<span class="w"> </span><span class="k">ldx</span><span class="w"> </span><span class="p">#</span><span class="o">&gt;</span><span class="n">ip</span>
-<span class="w"> </span><span class="k">jsr</span><span class="w"> </span><span class="n">connect</span>
-<span class="nl">ip:</span>
-<span class="w"> </span><span class="kp">.byte</span><span class="w"> </span><span class="mi">192</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">77</span>
-</code></pre></div>
-<h2 id="recv">recv</h2>
-<p><strong><em>Description</em></strong></p>
-<p>Get socket data</p>
-<p><strong><em>Input</em></strong></p>
-<ul>
-<li>Accumulator : Socket id</li>
-<li>X Register : Low ptr to store the buffer</li>
-<li>Y Register : High ptr to store the buffer</li>
-</ul>
-<p><strong><em>Modify</em></strong></p>
-<ul>
-<li>RES</li>
-</ul>
-<p><strong><em>Returns</em></strong></p>
-<ul>
-<li>
-<p>Accumulator : Error type</p>
-</li>
-<li>
-<p>X Register : Low length</p>
-</li>
-<li>
-<p>Y Register : High length</p>
-</li>
-</ul>
-<p>; Don't use flags
+<p>socket := tmp1
+   buffer := ptr1
+   length := RESB
+   flags  := tmp2
+   ; Don't use flags
+   sta     flags ; Stored but not managed
    ; Get length
    jsr     popax
-   sta     RES
-   stx     RES+1
+   sta     length
+   stx     length + 1
    ; get buf ptr
    jsr     popax
    sta     ptr1
-   stx     ptr1
+   stx     ptr1 + 1
    jsr     popa ; Get socket id
-   ldy     ptr1
-   ldx     ptr1
-   ;;@brief Send data into socket
-   ;;@inputA Socket id
-   ;;@inputY Low ptr of the buffer
-   ;;@inputX High ptr of the buffer
-   ;;inputMEM_RES Size of the bufer to send
-   jmp     send
-endproc</p>
-<h2 id="send">send</h2>
-<p><strong><em>Description</em></strong></p>
-<p>Send data into socket</p>
-<p><strong><em>Input</em></strong></p>
-<ul>
-<li>Accumulator : Socket id</li>
-<li>Y Register : Low ptr of the buffer</li>
-<li>X Register : High ptr of the buffer</li>
-<li>RES : Size of the bufer to send</li>
-</ul>
-<p><strong><em>Returns</em></strong></p>
-<ul>
-<li>Accumulator : Error type</li>
-</ul>
-<p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">; Use SENDTO macro</span>
-<span class="w"> </span><span class="n">SENDTO</span><span class="w"> </span><span class="n">current_socket</span><span class="p">,</span><span class="w"> </span><span class="n">str_password</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span>
-</code></pre></div>
-<h2 id="socket_close">socket_close</h2>
-<p><strong><em>Description</em></strong></p>
-<p>Close socket</p>
-<p><strong><em>Input</em></strong></p>
-<ul>
-<li>X Register : The socket id</li>
-</ul>
-<p>;;@<code>lda     #$00
-   ;;@</code> ldx     #AF_INET      ; domain
-   ;;@<code>ldy     #SOCK_STREAM  ; type
-   ;;@</code> jsr     socket
+   sta     socket
+   SEND socket, buffer, length
+   rts
+endproc
+   protocol := tmp1
+   type     := tmp2
+   domain   := tmp3
    ; Skip protocol
+   sta     protocol
    jsr     popa
    sta     RES+1 ; type
+   sta     type
    jsr     popa ; domain
-   tax
-   lda     #$00
-   ldy     RES+1
-   jsr     socket
-   ldx     #$00
+   sta     domain
+   SOCKET domain, type, protocol
    rts
-endproc</p>
-<h2 id="socket">socket</h2>
-<p><strong><em>Description</em></strong></p>
-<p>Open a socket</p>
-<p><strong><em>Input</em></strong></p>
-<ul>
-<li>Accumulator : protocol </li>
-<li>X Register : domain </li>
-<li>Y Register : type </li>
-</ul>
-<p><strong><em>Modify</em></strong></p>
-<ul>
-<li>RES</li>
-</ul>
-<p><strong><em>Returns</em></strong></p>
-<ul>
-<li>
-<p>X Register : The socket id</p>
-</li>
-<li>
-<p>Accumulator : if != -1 then it returns socket id. -1 is return if all socket are used</p>
-</li>
-</ul>
-<p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="c1">; or use Macro (socket.mac) SOCKET domain, type, protocol</span>
-<span class="w"> </span><span class="n">SOCKET</span><span class="w"> </span><span class="n">AF_INET</span><span class="p">,</span><span class="w"> </span><span class="n">SOCK_STREAM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span>
-</code></pre></div>
-<p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="k">lda</span><span class="w"> </span><span class="p">#</span><span class="mh">$00</span>
-<span class="w"> </span><span class="k">ldx</span><span class="w"> </span><span class="p">#</span><span class="n">AF_INET</span><span class="w"> </span><span class="c1">; domain</span>
-<span class="w"> </span><span class="k">ldy</span><span class="w"> </span><span class="p">#</span><span class="n">SOCK_STREAM</span><span class="w"> </span><span class="c1">; type</span>
-<span class="w"> </span><span class="k">jsr</span><span class="w"> </span><span class="n">socket</span>
-</code></pre></div></div>
+endproc</p></div>
 
 
 
