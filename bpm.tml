@@ -1,21 +1,32 @@
 [package]
-name = "socket"
-version = "2025.2"
-authors = [ "nobody@nobody.fr",]
+name = "socketlib"
+version = "2026.3"
+authors = [ "Jede",]
 license = "MIT OR Apache-2.0"
 edition = "2018"
 cpu = "6502"
 readme = ""
-repository = ""
+repository = "https://github.com/orix-software/socketlib"
 documentation = "https://orix-software.github.io/socketlib/api/"
 description = "Socket management"
-homepage = ""
+homepage = "https://github.com/orix-software/socketlib"
 buildfolder = "build"
 packagetype = "tgz"
 codetype = "lib"
 oricutron_replace_autoboot_run = "True"
 templatecode = ""
+orix_minimal_kernel_version = "2025.2"
+enable_publish = "True"
+enable_build = "True"
+mike_management = "True"
+lib = "True"
+rom_compatible = "False"
+web_doc_command = "mkdocs build"
+docsfolder = "mkdocs/docs/"
+default_generatedoc_version = "2026.4"
 
 [dependencies]
-inet = "2024.4"
-ch395 = "2024.4"
+inetlib = "2024.4"
+ch395lib = "2024.4"
+
+[srcfolders]
