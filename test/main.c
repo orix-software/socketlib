@@ -49,8 +49,8 @@ void main()
           break;
        }
 
-				      /********************************************************************/
-																															        /* After the socket descriptor is created, a bind() function gets a */
+/********************************************************************/
+/* After the socket descriptor is created, a bind() function gets a */
 /* unique name for the socket.                                      */
 /********************************************************************/
     memset(&serveraddr, 0, sizeof(serveraddr));
@@ -59,102 +59,88 @@ void main()
 
     rc = bind(sd, (struct sockaddr *)&serveraddr, SUN_LEN(&serveraddr));
      if (rc < 0)
-																											        {
+		{
         perror("bind() failed");
-																																															          break;
-																																																	        }
+	break;
+}
+/********************************************************************/
+      /* The listen() function allows the server to accept incoming       */
+		      /* client connections.  In this example, the backlog is set to 10.  */
+/* This means that the system will queue 10 incoming connection     */
+  /* requests before the system starts rejecting the incoming         */
+        /* requests.                                                        */
+		      /********************************************************************/
+			        rc = listen(sd, 10);
+					      if (rc< 0)
+						        {
+perror("listen() failed");
+break;
+   }
+	      printf("Ready for client connect().\n");
+		        /********************************************************************/
+				      /* The server uses the accept() function to accept an incoming      */
+					        /* connection request.  The accept() call will block indefinitely   */
+							      /* waiting for the incoming connection to arrive.                   */
+ /********************************************************************/
+										      sd2 = accept(sd, NULL, NULL);
+											        if (sd2 < 0)
+													      {
+														           perror("accept() failed");
+																            break;
+	      }
+		        /********************************************************************/
+				      /* In this example we know that the client will send 250 bytes of   */
+					        /* data over.  Knowing this, we can use the SO_RCVLOWAT socket      */
+							      /* option and specify that we don't want our recv() to wake up      */
+								        /* until all 250 bytes of data have arrived.                        */
+										      /********************************************************************/
+											        length = BUFFER_LENGTH;
+      rc = setsockopt(sd2, SOL_SOCKET, SO_RCVLOWAT,
+	                                            (char *)&length, sizeof(length));
+												      if (rc < 0)
+       {
+		         perror("setsockopt(SO_RCVLOWAT) failed");
+				          break;
+						        }
+								      /****************************************************/
+									        /* Receive that 250 bytes data from the client */
+	      /****************************************************/
+		        rc = recv(sd2, buffer, sizeof(buffer), 0);
+				      if (rc < 0)
+					        {
+							         perror("recv() failed");
+									          break;
+											        } 
+													      printf("%d bytes of data were received\n", rc);
+	        if (rc == 0 ||
+			          rc < sizeof(buffer))
+					        {
+							         printf("The client closed the connection before all of the\n");
+printf("data was sent\n");
+         break;
+}
+/********************************************************************/
+/* Echo the data back to the client                                 */
+/********************************************************************/
+rc = send(sd2, buffer, sizeof(buffer), 0);
+if (rc < 0)
+{
+ perror("send() failed");
+break;
+}
+/********************************************************************/
+ /* Program complete                                                 */
+/********************************************************************/
+} while (FALSE);
+/***********************************************************************/
+/* Close down any open socket descriptors                              */
+/***********************************************************************/
+if (sd != -1)
+close(sd);
+if (sd2 != -1)
+close(sd2);
+/***********************************************************************/
+/* Remove the UNIX path name from the file system                      */
+/***********************************************************************/
 
-																																																			      /********************************************************************/
-																																																				        /* The listen() function allows the server to accept incoming       */
-																																																						      /* client connections.  In this example, the backlog is set to 10.  */
-																																																							        /* This means that the system will queue 10 incoming connection     */
-																																																									      /* requests before the system starts rejecting the incoming         */
-																																																										        /* requests.                                                        */
-																																																												      /********************************************************************/
-																																																													        rc = listen(sd, 10);
-																																																															      if (rc< 0)
-																																																																        {
-																																																																		         perror("listen() failed");
-																																																																				          break;
-																																																																						        }
-
-																																																																								      printf("Ready for client connect().\n");
-
-																																																																									        /********************************************************************/
-																																																																											      /* The server uses the accept() function to accept an incoming      */
-																																																																												        /* connection request.  The accept() call will block indefinitely   */
-																																																																														      /* waiting for the incoming connection to arrive.                   */
-																																																																															        /********************************************************************/
-																																																																																	      sd2 = accept(sd, NULL, NULL);
-																																																																																		        if (sd2 < 0)
-																																																																																				      {
-																																																																																					           perror("accept() failed");
-																																																																																							            break;
-																																																																																										      }
-
-																																																																																											        /********************************************************************/
-																																																																																													      /* In this example we know that the client will send 250 bytes of   */
-																																																																																														        /* data over.  Knowing this, we can use the SO_RCVLOWAT socket      */
-																																																																																																      /* option and specify that we don't want our recv() to wake up      */
-																																																																																																	        /* until all 250 bytes of data have arrived.                        */
-																																																																																																			      /********************************************************************/
-																																																																																																				        length = BUFFER_LENGTH;
-																																																																																																						      rc = setsockopt(sd2, SOL_SOCKET, SO_RCVLOWAT,
-																																																																																																							                                            (char *)&length, sizeof(length));
-																																																																																																																		      if (rc < 0)
-																																																																																																																			        {
-																																																																																																																					         perror("setsockopt(SO_RCVLOWAT) failed");
-																																																																																																																							          break;
-																																																																																																																									        }
-																																																																																																																											      /****************************************************/
-																																																																																																																												        /* Receive that 250 bytes data from the client */
-																																																																																																																														      /****************************************************/
-																																																																																																																															        rc = recv(sd2, buffer, sizeof(buffer), 0);
-																																																																																																																																	      if (rc < 0)
-																																																																																																																																		        {
-																																																																																																																																				         perror("recv() failed");
-																																																																																																																																						          break;
-																																																																																																																																								        } 
-																																																																																																																																										      printf("%d bytes of data were received\n", rc);
-																																																																																																																																											        if (rc == 0 ||
-																																																																																																																																													          rc < sizeof(buffer))
-																																																																																																																																															        {
-																																																																																																																																																	         printf("The client closed the connection before all of the\n");
-																																																																																																																																																			          printf("data was sent\n");
-																																																																																																																																																					           break;
-																																																																																																																																																							         }
-
-																																																																																																																																																									       /********************************************************************/
-																																																																																																																																																										         /* Echo the data back to the client                                 */
-																																																																																																																																																												       /********************************************************************/
-																																																																																																																																																													         rc = send(sd2, buffer, sizeof(buffer), 0);
-																																																																																																																																																															       if (rc < 0)
-																																																																																																																																																																         {
-																																																																																																																																																																		          perror("send() failed");
-																																																																																																																																																																				           break;
-																																																																																																																																																																						         }
-
-																																																																																																																																																																								       /********************************************************************/
-																																																																																																																																																																									         /* Program complete                                                 */
-																																																																																																																																																																											       /********************************************************************/
-
-																																																																																																																																																																												      } while (FALSE);
-
-																																																																																																																																																																													     /***********************************************************************/
-																																																																																																																																																																														    /* Close down any open socket descriptors                              */
-																																																																																																																																																																															   /***********************************************************************/
-																																																																																																																																																																															      if (sd != -1)
-																																																																																																																																																																																        close(sd);
-
-																																																																																																																																																																																		   if (sd2 != -1)
-																																																																																																																																																																																		         close(sd2);
-
-																																																																																																																																																																																				     /***********************************************************************/
-																																																																																																																																																																																					    /* Remove the UNIX path name from the file system                      */
-																																																																																																																																																																																						   /***********************************************************************/
-																																																																																																																																																																																						      unlink(SERVER_PATH);
-																																																																																																																																																																																							  }
-																																																																																																																																																																																							  Kopieren
-
-																																																																																																																																																																																							  
-
+}
