@@ -1,4 +1,3 @@
-
 .define KERNEL_SOCKET_NETWORK            $05
 .define KERNEL_BIND_NETWORK              $06
 .define KERNEL_CONNECT_NETWORK           $07
@@ -6,13 +5,16 @@
 .define KERNEL_SEND_NETWORK              $09
 .define KERNEL_SOCKET_CLOSE_NETWORK      $0A
 
+
+.define KERNEL_NETWORK_ROUTINES_NUMBER  $01 ; The set of routines that are used to manage the network. This is the number of the routine set.
+
 .macro SOCKET domain, type, protocol
     lda     #$00
     ldx     domain
     ldy     type
 
     lda     #KERNEL_SOCKET_NETWORK
-    BRK_TELEMON $01
+    BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
 
 ;int connect(int sockfd, const struct sockaddr *serv_addr,
@@ -20,14 +22,14 @@
 .macro CONNECT socket, ip, dest_port
     lda     dest_port  ; Port 80
     sta     RESB
-    lda     dest_port+1 ; Port ie 80
+    lda     dest_port + 1 ; Port ie 80
     sta     RESB + 1
     lda     socket
     sta     TR0
     ldy     ip
     ldx     ip + 1
     lda     #KERNEL_CONNECT_NETWORK ; Connect
-    BRK_TELEMON $01
+    BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
 
 .macro SEND socket, buffer, length
@@ -44,7 +46,7 @@
     ldx     length + 1 ; High
 
     lda     #KERNEL_SEND_NETWORK ; Connect
-    BRK_TELEMON $01
+    BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
 
 .macro RECV socket, buffer, length
@@ -52,7 +54,7 @@
     sta     TR0
 
     ldy     buffer
-    ldx     buffer+1
+    ldx     buffer + 1
     ;;@brief Get socket data RES contains the buffer but it's modifyed. Keep ptr 
     ;;@inputTR0 Socket id
     ;;@inputY Low ptr to store the buffer
@@ -66,7 +68,7 @@
     ;;@returnsY High length
 
     lda     #KERNEL_RECV_NETWORK
-    BRK_TELEMON $01
+    BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
     ;ldy     length_receveived
     ;ldx     length_receveived+1
 
@@ -76,5 +78,5 @@
 .macro CLOSE_SOCKET socket
     ldx     socket
     lda     #KERNEL_SOCKET_CLOSE_NETWORK
-    BRK_TELEMON $01
+    BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
