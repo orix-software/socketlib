@@ -52,10 +52,8 @@ theme:
 
 nav:
     - Introduction: index.md
-    - Versions:
-        - 2025.2:
-            - Assembly: 2025.2/assembly.md
-            - C: 2025.2/c.md
+    - Assembly: assembly.md
+    - C: c.md
 
 
 #extra_css:
@@ -72,4 +70,4 @@ extra:
   version:
     provider: mike
     alias:
-      dev: "2026.4"
+      dev: "2026.4 (dev version)"

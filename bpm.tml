@@ -1,6 +1,6 @@
 [package]
 name = "socketlib"
-version = "2026.3"
+version = "2026.4"
 authors = [ "Jede",]
 license = "MIT OR Apache-2.0"
 edition = "2018"
@@ -24,6 +24,7 @@ rom_compatible = "False"
 web_doc_command = "mkdocs build"
 docsfolder = "mkdocs/docs/"
 default_generatedoc_version = "2026.4"
+orixsdk_version = "2023.3.0"
 
 [dependencies]
 inetlib = "2024.4"
