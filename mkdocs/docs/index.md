@@ -2,7 +2,7 @@
 
 <!-- BPMBEGIN -->
 
-## C function
+## C functions
 
 - [_bind](_bind.md)
 - [_connect](_connect.md)
@@ -13,7 +13,7 @@
 - [_socket](_socket.md)
 - [_socket_close](_socket_close.md)
 
-## Assmebly function
+## Assembly functions
 
 - [bind](bind.md)
 
