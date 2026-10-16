@@ -4,14 +4,14 @@
 
 ## C functions
 
-- [_bind](_bind.md)
-- [_connect](_connect.md)
-- [_recv](_recv.md)
-- [_recvfrom](_recvfrom.md)
-- [_send](_send.md)
-- [_sendto](_sendto.md)
-- [_socket](_socket.md)
-- [_socket_close](_socket_close.md)
+- [bind](_bind.md)
+- [connect](_connect.md)
+- [recv](_recv.md)
+- [recvfrom](_recvfrom.md)
+- [send](_send.md)
+- [sendto](_sendto.md)
+- [socket](_socket.md)
+- [socket_close](_socket_close.md)
 
 ## Assembly functions
 
