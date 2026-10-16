@@ -11,6 +11,14 @@
 
 .proc _recvfrom
     ; int recvfrom(unsigned char sockfd, void *buf, size_t len, unsigned char flags, struct sockaddr *src_addr, socklen_t *addrlen);
+    ;;@proto recvfrom(sockfd, buf, len, flags, src_addr, addrlen)
+    ;;@brief Receive a message from a socket
+    ;;@param sockfd The socket file descriptor
+    ;;@param buf The buffer to store the received data
+    ;;@param len The length of the buffer
+    ;;@param flags The flags for the receive operation
+    ;;@param src_addr The address of the sender
+    ;;@param addrlen The length of the sender's address
     addrlen   := tmp1
     dest_addr := ptr1
     flags     := tmp2

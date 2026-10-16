@@ -1,5 +1,9 @@
 # Socketlib
 
+This lib uses Orix kernel routines.
+
+Each routines call subroutine from kernel
+
 <!-- BPMBEGIN -->
 
 ## C functions
