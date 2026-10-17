@@ -619,6 +619,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="SOCKET">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -628,14 +652,29 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="CONNECT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#syntax" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -646,9 +685,10 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="SEND">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#syntax_1" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
@@ -656,17 +696,42 @@
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#recv" class="md-nav__link">
     <span class="md-ellipsis">
       RECV
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="RECV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#syntax_2" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
@@ -674,22 +739,83 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modify" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modify
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#close_socket" class="md-nav__link">
     <span class="md-ellipsis">
       CLOSE_SOCKET
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="CLOSE_SOCKET">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#syntax_3" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -709,26 +835,24 @@
 
 
 
-  <h1>Socket macro</h1>
-
 <div><hr>
 <h2 id="socket">SOCKET</h2>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description">Description</h3>
 <p>Open a socket</p>
 <ul>
 <li><em>domain</em> The communication domain (e.g., AF_INET) (adress ex $abcd)| domain | The communication domain (e.g., AF_INET) (adress ex $abcd) |</li>
 <li><em>type</em> The type of socket (e.g., SOCK_STREAM) (address ex $abcd)| type | The type of socket (e.g., SOCK_STREAM) (address ex $abcd) |</li>
 <li><em>protocol</em> The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)| protocol | The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd) |</li>
 </ul>
-<p><strong><em>Returns</em></strong></p>
+<h3 id="returns">Returns</h3>
 <ul>
 <li>Accumulator : The socket file descriptor (sockfd) or -1 on error</li>
 </ul>
 <hr>
 <h2 id="connect">CONNECT</h2>
-<h2 id="syntax">Syntax</h2>
+<h3 id="syntax">Syntax</h3>
 <p>CONNECT socket, ip, dest_port</p>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description_1">Description</h3>
 <p>Connect a socket to a remote address</p>
 <ul>
 <li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
@@ -737,40 +861,41 @@
 </ul>
 <hr>
 <h2 id="send">SEND</h2>
-<h2 id="syntax_1">Syntax</h2>
+<h3 id="syntax_1">Syntax</h3>
 <p>SEND socket, buffer, length</p>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description_2">Description</h3>
 <p>Send data through a socket</p>
 <ul>
 <li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
 <li><em>buffer</em> The buffer containing the data to send (address ex $abcd)| buffer | The buffer containing the data to send (address ex $abcd) |</li>
 <li><em>length</em> The length of the data to send (address ex $abcd)| length | The length of the data to send (address ex $abcd) |</li>
 </ul>
+<h1 id="macros">Macros</h1>
 <hr>
 <h2 id="recv">RECV</h2>
-<h2 id="syntax_2">Syntax</h2>
+<h3 id="syntax_2">Syntax</h3>
 <p>RECV socket, buffer, length</p>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description_3">Description</h3>
 <p>Receive data from a socket</p>
 <ul>
 <li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
 <li><em>buffer</em> The buffer to store the received data (address ex $abcd)| buffer | The buffer to store the received data (address ex $abcd) |</li>
 <li><em>length</em> The length of the buffer (address ex $abcd)| length | The length of the buffer (address ex $abcd) |</li>
 </ul>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description_4">Description</h3>
 <p>Get socket data RES contains the buffer but it's modifyed. Keep ptr</p>
 <ul>
 <li>Y Register : Low ptr to store the buffer</li>
 <li>X Register : High ptr to store the buffer</li>
 </ul>
-<p><strong><em>Modify</em></strong></p>
+<h3 id="modify">Modify</h3>
 <ul>
 <li>RES</li>
 <li>RESB</li>
 <li>TR1</li>
 <li>TR2</li>
 </ul>
-<p><strong><em>Returns</em></strong></p>
+<h3 id="returns_1">Returns</h3>
 <ul>
 <li>Accumulator : Error type. If A = EOK then something had been received</li>
 <li>X Register : Low length</li>
@@ -778,9 +903,9 @@
 </ul>
 <hr>
 <h2 id="close_socket">CLOSE_SOCKET</h2>
-<h2 id="syntax_3">Syntax</h2>
+<h3 id="syntax_3">Syntax</h3>
 <p>CLOSE_SOCKET socket</p>
-<p><strong><em>Description</em></strong></p>
+<h3 id="description_5">Description</h3>
 <p>Close a socket</p>
 <ul>
 <li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
