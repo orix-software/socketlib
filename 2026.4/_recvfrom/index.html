@@ -734,7 +734,7 @@
   <h1>recvfrom</h1>
 
 <div><h2 id="syntax">Syntax</h2>
-<p>recvfrom(sockfd, buf, len, flags, src_addr, addrlen)</p>
+<p>int recvfrom(unsigned char sockfd, void <em>buf, size_t len, unsigned char flags, struct sockaddr </em>src_addr, socklen_t *addrlen);</p>
 <h2 id="description">Description</h2>
 <p>Receive a message from a socket</p>
 <h2 id="input">Input</h2>
