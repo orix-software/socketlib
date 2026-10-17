@@ -11,8 +11,13 @@
 .importzp ptr1, ptr2, ptr3, tmp1
 
 .proc _connect
-    ; connect(sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) == -1
-    ; A and X contains the size
+
+    ;;@proto int connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addrlen);
+    ;;@brief Connect a socket to a remote address
+    ;;@param sockfd The socket file descriptor
+    ;;@param addr The address to connect to
+    ;;@param addrlen The length of the address structure
+
     dest_port := RESB
     ip        := ptr2
     socket    := tmp1
@@ -42,8 +47,6 @@
     iny
     lda     (ptr1),y
     sta     RESB + 1
-
-
 
     ; Compute ip addr ptr
     lda     #sockaddr_in::sin_addr

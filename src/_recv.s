@@ -12,6 +12,11 @@
 .proc _recv
     ;;@proto int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
     ;;@brief Does not handle flags
+    ;;@param s The socket file descriptor
+    ;;@param buf The buffer to store the received data
+    ;;@param len The length of the buffer
+    ;;@param flags The flags for the receive operation (not handled)
+
     length := ptr2
     buffer := ptr1
     socket := tmp1

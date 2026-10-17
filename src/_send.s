@@ -11,6 +11,10 @@
 .proc _send
     ;;@proto unsigned int send(unsigned char sockfd, const void buf[], unsigned int len, unsigned char flags);
     ;;@brief Does not handle flags
+    ;;@param sockfd The socket file descriptor
+    ;;@param buf The buffer containing the data to send
+    ;;@param len The length of the data to send
+    ;;@param flags The flags for the send operation (not handled)
     ;; send(sock, request, strlen(request), 0) == -1)
     socket := tmp1
     buffer := ptr1

@@ -14,7 +14,7 @@
 
 .proc _bind
     ;;@proto unsigned char bind(unsigned char socket, const struct sockaddr_in* addr, unsigned int addrlen);
-    ;;@brief Bind a socket to an address  (does not work : WIP)
+    ;;@brief Bind a socket to an address (does not work : WIP)
     ;;@param socket The socket file descriptor
     ;;@param addr The address to bind to
     ;;@param addrlen The length of the address structure

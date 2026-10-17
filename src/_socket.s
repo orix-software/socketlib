@@ -7,8 +7,12 @@
 .importzp tmp1, tmp2, tmp3
 
 .proc _socket
+
     ;;@brief Open a socket
     ;;@proto unsigned char socket (unsigned char  domain, unsigned char  __type, unsigned char protocol);
+    ;;@param domain The communication domain (e.g., AF_INET)
+    ;;@param __type The type of socket (e.g., SOCK_STREAM)
+    ;;@param protocol The protocol to be used (e.g., IPPROTO_TCP)
     ;; sock = socket(AF_INET, SOCK_STREAM, 0);
 
     protocol := tmp1

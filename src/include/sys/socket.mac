@@ -9,6 +9,14 @@
 .define KERNEL_NETWORK_ROUTINES_NUMBER  $01 ; The set of routines that are used to manage the network. This is the number of the routine set.
 
 .macro SOCKET domain, type, protocol
+    ;;@proto SOCKET domain, type, protocol
+    ;;@brief Open a socket
+    ;;@param domain The communication domain (e.g., AF_INET) (adress ex $abcd)
+    ;;@param type The type of socket (e.g., SOCK_STREAM) (address ex $abcd)
+    ;;@param protocol The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)
+    ;;@returnsA The socket file descriptor (sockfd) or -1 on error
+
+
     lda     #$00
     ldx     domain
     ldy     type
@@ -20,6 +28,11 @@
 ;int connect(int sockfd, const struct sockaddr *serv_addr,
 ;            socklen_t addrlen);
 .macro CONNECT socket, ip, dest_port
+    ;;@proto CONNECT socket, ip, dest_port
+    ;;@brief Connect a socket to a remote address
+    ;;@param socket The socket file descriptor
+    ;;@param ip The IP address to connect to (address ex $abcd)
+    ;;@param dest_port The destination port to connect to (address ex $abcd)
     lda     dest_port  ; Port 80
     sta     RESB
     lda     dest_port + 1 ; Port ie 80
@@ -33,6 +46,12 @@
 .endmacro
 
 .macro SEND socket, buffer, length
+    ;;@proto SEND socket, buffer, length
+    ;;@brief Send data through a socket
+    ;;@param socket The socket file descriptor
+    ;;@param buffer The buffer containing the data to send (address ex $abcd)
+    ;;@param length The length of the data to send (address ex $abcd)
+    ;;@paramMemoryTR0
     lda     socket
     sta     TR0
     ; Set buffer
@@ -50,6 +69,12 @@
 .endmacro
 
 .macro RECV socket, buffer, length
+    ;;@proto RECV socket, buffer, length
+    ;;@brief Receive data from a socket
+    ;;@param socket The socket file descriptor
+    ;;@param buffer The buffer to store the received data (address ex $abcd)
+    ;;@param length The length of the buffer (address ex $abcd)
+
     lda     socket
     sta     TR0
 
@@ -76,6 +101,9 @@
 .endmacro
 
 .macro CLOSE_SOCKET socket
+    ;;@proto CLOSE_SOCKET socket
+    ;;@brief Close a socket
+    ;;@param socket The socket file descriptor
     ldx     socket
     lda     #KERNEL_SOCKET_CLOSE_NETWORK
     BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER

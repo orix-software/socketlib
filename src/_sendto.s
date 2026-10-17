@@ -11,6 +11,14 @@
 
 .proc _sendto
     ;;@proto int sendto(unsigned char sockfd, const void *buf, size_t len, unsigned char flags, const struct sockaddr *dest_addr, socklen_t addrlen);
+    ;;@brief Send a message to a socket
+    ;;@param sockfd The socket file descriptor
+    ;;@param buf The buffer containing the data to send
+    ;;@param len The length of the data to send
+    ;;@param flags The flags for the send operation
+    ;;@param dest_addr The address of the destination
+    ;;@param addrlen The length of the destination address structure
+
     addrlen   := tmp1
     dest_addr := ptr1
     flags     := tmp2
