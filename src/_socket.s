@@ -19,7 +19,7 @@
     sta     protocol
 
     jsr     popa
-    sta     RES+1 ; type
+    sta     RES + 1 ; type
     sta     type
 
     jsr     popa ; domain

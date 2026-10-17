@@ -10,7 +10,7 @@
 .import ch395_tcp_listen_sn
 
 .proc bind
-    ;;@brief Bind sockets
+    ;;@brief Bind sockets (does not work : WIP)
     ;;@inputX Socket id
     ;;@inputA Low byte of port
     ;;@inputY High byte of port
