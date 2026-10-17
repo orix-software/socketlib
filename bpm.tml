@@ -23,7 +23,7 @@ lib = "True"
 rom_compatible = "False"
 web_doc_command = "mkdocs build"
 docsfolder = "mkdocs/docs/"
-default_generatedoc_version = "2026.4"
+default_generatedoc_version = "2026.4.7"
 orixsdk_version = "2023.3.0"
 
 [dependencies]

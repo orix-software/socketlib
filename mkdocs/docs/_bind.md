@@ -11,11 +11,7 @@ Bind a socket to an address (does not work : WIP)
 
 | param      | Description                          |
 | ----------- | ------------------------------------ |
-| socket | The |
-| addr | The |
-| addrlen | The |
+| socket | The socket file descriptor |
+| addr | The address to bind to |
+| addrlen | The length of the address structure |
 
----
-hide:
-  - toc
----
