@@ -21,4 +21,14 @@ Each routines call subroutine from kernel
 
 - [bind](bind.md)
 
+## Macros (for assembly)
+
+- [SOCKET domain, type, protocol](socket_macro.md)
+- [CONNECT socket, ip, dest_port](socket_macro.md)
+- [SEND socket, buffer, length](socket_macro.md)
+- [RECV socket, buffer, length](socket_macro.md)
+- [CLOSE_SOCKET socket](socket_macro.md)
+
+
+
 <!-- BPMEND -->

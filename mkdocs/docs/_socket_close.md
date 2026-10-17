@@ -7,6 +7,7 @@ int socket_close(unsigned char sockfd);
 
 Close a socket
 
+
 ## Input
 
 | param      | Description                          |

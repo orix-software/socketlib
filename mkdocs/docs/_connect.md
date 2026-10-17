@@ -7,6 +7,7 @@ int connect(unsigned char sockfd, const struct sockaddr *addr, unsigned int addr
 
 Connect a socket to a remote address
 
+
 ## Input
 
 | param      | Description                          |

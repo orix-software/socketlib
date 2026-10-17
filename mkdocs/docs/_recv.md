@@ -7,6 +7,7 @@ int recv(unsigned char s, void *buf, unsigned int len, unsigned char flags);
 
 Does not handle flags
 
+
 ## Input
 
 | param      | Description                          |
