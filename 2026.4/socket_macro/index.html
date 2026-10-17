@@ -623,6 +623,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#description" class="md-nav__link">
     <span class="md-ellipsis">
       Description
@@ -656,7 +665,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
+  <a href="#syntax_1" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
@@ -689,7 +698,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax_1" class="md-nav__link">
+  <a href="#syntax_2" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
@@ -732,7 +741,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax_2" class="md-nav__link">
+  <a href="#syntax_3" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
@@ -792,7 +801,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#syntax_3" class="md-nav__link">
+  <a href="#syntax_4" class="md-nav__link">
     <span class="md-ellipsis">
       Syntax
     </span>
@@ -837,8 +846,10 @@
 
 <div><hr>
 <h2 id="socket">SOCKET</h2>
+<h3 id="syntax">Syntax</h3>
+<p>SOCKET domain, type, protocol</p>
 <h3 id="description">Description</h3>
-<p>Open a socket (FIXME: This function is not implemented yet)</p>
+<p>Open a socket</p>
 <ul>
 <li><em>domain</em> The communication domain (e.g., AF_INET) (adress ex $abcd)| domain | The communication domain (e.g., AF_INET) (adress ex $abcd) |</li>
 <li><em>type</em> The type of socket (e.g., SOCK_STREAM) (address ex $abcd)| type | The type of socket (e.g., SOCK_STREAM) (address ex $abcd) |</li>
@@ -850,7 +861,7 @@
 </ul>
 <hr>
 <h2 id="connect">CONNECT</h2>
-<h3 id="syntax">Syntax</h3>
+<h3 id="syntax_1">Syntax</h3>
 <p>CONNECT socket, ip, dest_port</p>
 <h3 id="description_1">Description</h3>
 <p>Connect a socket to a remote address</p>
@@ -861,7 +872,7 @@
 </ul>
 <hr>
 <h2 id="send">SEND</h2>
-<h3 id="syntax_1">Syntax</h3>
+<h3 id="syntax_2">Syntax</h3>
 <p>SEND socket, buffer, length</p>
 <h3 id="description_2">Description</h3>
 <p>Send data through a socket</p>
@@ -873,7 +884,7 @@
 <h1 id="macros">Macros</h1>
 <hr>
 <h2 id="recv">RECV</h2>
-<h3 id="syntax_2">Syntax</h3>
+<h3 id="syntax_3">Syntax</h3>
 <p>RECV socket, buffer, length</p>
 <h3 id="description_3">Description</h3>
 <p>Receive data from a socket</p>
@@ -903,7 +914,7 @@
 </ul>
 <hr>
 <h2 id="close_socket">CLOSE_SOCKET</h2>
-<h3 id="syntax_3">Syntax</h3>
+<h3 id="syntax_4">Syntax</h3>
 <p>CLOSE_SOCKET socket</p>
 <h3 id="description_5">Description</h3>
 <p>Close a socket</p>
