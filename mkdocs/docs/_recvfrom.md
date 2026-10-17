@@ -1,6 +1,6 @@
 ## Syntax
 
-recvfrom(sockfd, buf, len, flags, src_addr, addrlen)
+int recvfrom(unsigned char sockfd, void *buf, size_t len, unsigned char flags, struct sockaddr *src_addr, socklen_t *addrlen);
 
 
 ## Description
@@ -11,12 +11,12 @@ Receive a message from a socket
 
 | param      | Description                          |
 | ----------- | ------------------------------------ |
-| sockfd | The |
-| buf | The |
-| len | The |
-| flags | The |
-| src_addr | The |
-| addrlen | The |
+| sockfd | The socket file descriptor|
+| buf | The buffer to store the received data|
+| len | The length of the buffer|
+| flags | The flags for the receive operation|
+| src_addr | The address of the sender|
+| addrlen | The length of the sender's address|
 
 ---
 hide:

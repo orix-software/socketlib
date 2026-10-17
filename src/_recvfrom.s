@@ -10,8 +10,8 @@
 .import popa, popax
 
 .proc _recvfrom
-    ; int recvfrom(unsigned char sockfd, void *buf, size_t len, unsigned char flags, struct sockaddr *src_addr, socklen_t *addrlen);
-    ;;@proto recvfrom(sockfd, buf, len, flags, src_addr, addrlen)
+
+    ;;@proto int recvfrom(unsigned char sockfd, void *buf, size_t len, unsigned char flags, struct sockaddr *src_addr, socklen_t *addrlen);
     ;;@brief Receive a message from a socket
     ;;@param sockfd The socket file descriptor
     ;;@param buf The buffer to store the received data
