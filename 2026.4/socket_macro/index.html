@@ -641,9 +641,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#returns" class="md-nav__link">
+  <a href="#input" class="md-nav__link">
     <span class="md-ellipsis">
-      Returns
+      Input
     </span>
   </a>
   
@@ -655,6 +655,25 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#macros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#connect" class="md-nav__link">
     <span class="md-ellipsis">
       CONNECT
@@ -682,12 +701,36 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
+  <a href="#macros_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#send" class="md-nav__link">
     <span class="md-ellipsis">
       SEND
@@ -715,13 +758,36 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#input_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#macros" class="md-nav__link">
+  <a href="#macros_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macros
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros_3" class="md-nav__link">
     <span class="md-ellipsis">
       Macros
     </span>
@@ -759,6 +825,35 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#input_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#macros_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Macros
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Macros">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#description_4" class="md-nav__link">
     <span class="md-ellipsis">
       Description
@@ -785,11 +880,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#close_socket" class="md-nav__link">
     <span class="md-ellipsis">
@@ -813,6 +903,15 @@
   <a href="#description_5" class="md-nav__link">
     <span class="md-ellipsis">
       Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
     </span>
   </a>
   
@@ -850,11 +949,28 @@
 <p>SOCKET domain, type, protocol ()</p>
 <h3 id="description">Description</h3>
 <p>Open a socket</p>
-<ul>
-<li><em>domain</em> The communication domain (e.g., AF_INET) (adress ex $abcd)| domain | The communication domain (e.g., AF_INET) (adress ex $abcd) |</li>
-<li><em>type</em> The type of socket (e.g., SOCK_STREAM) (address ex $abcd)| type | The type of socket (e.g., SOCK_STREAM) (address ex $abcd) |</li>
-<li><em>protocol</em> The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)| protocol | The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd) |</li>
-</ul>
+<h3 id="input">Input</h3>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain</td>
+<td>The communication domain (e.g., AF_INET) (adress ex $abcd)</td>
+</tr>
+<tr>
+<td># Macros</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| type | The type of socket (e.g., SOCK_STREAM) (address ex $abcd) |</p>
+<h1 id="macros">Macros</h1>
+<p>| protocol | The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd) |</p>
 <h3 id="returns">Returns</h3>
 <ul>
 <li>Accumulator : The socket file descriptor (sockfd) or -1 on error</li>
@@ -865,34 +981,85 @@
 <p>CONNECT socket, ip, dest_port</p>
 <h3 id="description_1">Description</h3>
 <p>Connect a socket to a remote address</p>
-<ul>
-<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
-<li><em>ip</em> The IP address to connect to (address ex $abcd)| ip | The IP address to connect to (address ex $abcd) |</li>
-<li><em>dest_port</em> The destination port to connect to (address ex $abcd)| dest_port | The destination port to connect to (address ex $abcd) |</li>
-</ul>
+<h3 id="input_1">Input</h3>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket</td>
+<td>The socket file descriptor</td>
+</tr>
+<tr>
+<td># Macros</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| ip | The IP address to connect to (address ex $abcd) |</p>
+<h1 id="macros_1">Macros</h1>
+<p>| dest_port | The destination port to connect to (address ex $abcd) |</p>
 <hr>
 <h2 id="send">SEND</h2>
 <h3 id="syntax_2">Syntax</h3>
 <p>SEND socket, buffer, length</p>
 <h3 id="description_2">Description</h3>
 <p>Send data through a socket</p>
-<ul>
-<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
-<li><em>buffer</em> The buffer containing the data to send (address ex $abcd)| buffer | The buffer containing the data to send (address ex $abcd) |</li>
-<li><em>length</em> The length of the data to send (address ex $abcd)| length | The length of the data to send (address ex $abcd) |</li>
-</ul>
-<h1 id="macros">Macros</h1>
+<h3 id="input_2">Input</h3>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket</td>
+<td>The socket file descriptor</td>
+</tr>
+<tr>
+<td># Macros</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| buffer | The buffer containing the data to send (address ex $abcd) |</p>
+<h1 id="macros_2">Macros</h1>
+<p>| length | The length of the data to send (address ex $abcd) |</p>
+<h1 id="macros_3">Macros</h1>
 <hr>
 <h2 id="recv">RECV</h2>
 <h3 id="syntax_3">Syntax</h3>
 <p>RECV socket, buffer, length</p>
 <h3 id="description_3">Description</h3>
 <p>Receive data from a socket</p>
-<ul>
-<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
-<li><em>buffer</em> The buffer to store the received data (address ex $abcd)| buffer | The buffer to store the received data (address ex $abcd) |</li>
-<li><em>length</em> The length of the buffer (address ex $abcd)| length | The length of the buffer (address ex $abcd) |</li>
-</ul>
+<h3 id="input_3">Input</h3>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket</td>
+<td>The socket file descriptor</td>
+</tr>
+<tr>
+<td># Macros</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| buffer | The buffer to store the received data (address ex $abcd) |</p>
+<h1 id="macros_4">Macros</h1>
+<p>| length | The length of the buffer (address ex $abcd) |</p>
 <h3 id="description_4">Description</h3>
 <p>Get socket data RES contains the buffer but it's modifyed. Keep ptr</p>
 <ul>
@@ -918,9 +1085,21 @@
 <p>CLOSE_SOCKET socket</p>
 <h3 id="description_5">Description</h3>
 <p>Close a socket</p>
-<ul>
-<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
-</ul></div>
+<h3 id="input_4">Input</h3>
+<table>
+<thead>
+<tr>
+<th>param</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>socket</td>
+<td>The socket file descriptor</td>
+</tr>
+</tbody>
+</table></div>
 
 
 
