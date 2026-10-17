@@ -678,8 +678,12 @@
 <div><hr>
 <h2 id="socket">SOCKET</h2>
 <p><strong><em>Description</em></strong></p>
-<p>Open a socket
-* <em>domain</em> The communication domain (e.g., AF_INET) (adress ex $abcd)<em> </em>type<em> The type of socket (e.g., SOCK_STREAM) (address ex $abcd)</em> <em>protocol</em> The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)</p>
+<p>Open a socket</p>
+<ul>
+<li><em>domain</em> The communication domain (e.g., AF_INET) (adress ex $abcd)| domain | The communication domain (e.g., AF_INET) (adress ex $abcd) |</li>
+<li><em>type</em> The type of socket (e.g., SOCK_STREAM) (address ex $abcd)| type | The type of socket (e.g., SOCK_STREAM) (address ex $abcd) |</li>
+<li><em>protocol</em> The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)| protocol | The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd) |</li>
+</ul>
 <p><strong><em>Returns</em></strong></p>
 <ul>
 <li>Accumulator : The socket file descriptor (sockfd) or -1 on error</li>
