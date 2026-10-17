@@ -631,9 +631,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#send" class="md-nav__link">
     <span class="md-ellipsis">
       SEND
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
     </span>
   </a>
   
@@ -649,9 +667,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#close_socket" class="md-nav__link">
     <span class="md-ellipsis">
       CLOSE_SOCKET
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#syntax_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
     </span>
   </a>
   
@@ -690,13 +726,39 @@
 </ul>
 <hr>
 <h2 id="connect">CONNECT</h2>
+<h2 id="syntax">Syntax</h2>
+<p>CONNECT socket, ip, dest_port</p>
+<p><strong><em>Description</em></strong></p>
+<p>Connect a socket to a remote address</p>
+<ul>
+<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
+<li><em>ip</em> The IP address to connect to (address ex $abcd)| ip | The IP address to connect to (address ex $abcd) |</li>
+<li><em>dest_port</em> The destination port to connect to (address ex $abcd)| dest_port | The destination port to connect to (address ex $abcd) |</li>
+</ul>
 <hr>
 <h2 id="send">SEND</h2>
+<h2 id="syntax_1">Syntax</h2>
+<p>SEND socket, buffer, length</p>
+<p><strong><em>Description</em></strong></p>
+<p>Send data through a socket</p>
+<ul>
+<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
+<li><em>buffer</em> The buffer containing the data to send (address ex $abcd)| buffer | The buffer containing the data to send (address ex $abcd) |</li>
+<li><em>length</em> The length of the data to send (address ex $abcd)| length | The length of the data to send (address ex $abcd) |</li>
+</ul>
 <hr>
 <h2 id="recv">RECV</h2>
+<h2 id="syntax_2">Syntax</h2>
+<p>RECV socket, buffer, length</p>
+<p><strong><em>Description</em></strong></p>
+<p>Receive data from a socket</p>
+<ul>
+<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
+<li><em>buffer</em> The buffer to store the received data (address ex $abcd)| buffer | The buffer to store the received data (address ex $abcd) |</li>
+<li><em>length</em> The length of the buffer (address ex $abcd)| length | The length of the buffer (address ex $abcd) |</li>
+</ul>
 <p><strong><em>Description</em></strong></p>
 <p>Get socket data RES contains the buffer but it's modifyed. Keep ptr</p>
-<p><strong><em>Input</em></strong></p>
 <ul>
 <li>Y Register : Low ptr to store the buffer</li>
 <li>X Register : High ptr to store the buffer</li>
@@ -715,7 +777,14 @@
 <li>Y Register : High length</li>
 </ul>
 <hr>
-<h2 id="close_socket">CLOSE_SOCKET</h2></div>
+<h2 id="close_socket">CLOSE_SOCKET</h2>
+<h2 id="syntax_3">Syntax</h2>
+<p>CLOSE_SOCKET socket</p>
+<p><strong><em>Description</em></strong></p>
+<p>Close a socket</p>
+<ul>
+<li><em>socket</em> The socket file descriptor| socket | The socket file descriptor |</li>
+</ul></div>
 
 
 
