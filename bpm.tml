@@ -1,3 +1,7 @@
+[[bin]]
+name = "gethttp"
+path_gethttp = "test/gethttp.c"
+
 [package]
 name = "socketlib"
 version = "2026.4"
@@ -7,7 +11,7 @@ edition = "2018"
 cpu = "6502"
 readme = ""
 repository = "https://github.com/orix-software/socketlib"
-documentation = "https://orix-software.github.io/socketlib/api/"
+documentation = "https://orix-software.github.io/socketlib/"
 description = "Socket management"
 homepage = "https://github.com/orix-software/socketlib"
 buildfolder = "build"
@@ -25,6 +29,7 @@ web_doc_command = "mkdocs build"
 docsfolder = "mkdocs/docs/"
 default_generatedoc_version = "2026.4.7"
 orixsdk_version = "2023.3.0"
+orix_run_pre_script = "scripts/network.sub"
 
 [dependencies]
 inetlib = "2025.1"
