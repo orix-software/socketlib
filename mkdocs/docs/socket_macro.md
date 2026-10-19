@@ -10,7 +10,7 @@ SOCKET domain, type, protocol
 
 ### Description
 
-Open a socket
+Open a socket (protocol is not handled yet) (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocket/)
 
 
 ### Input
@@ -26,6 +26,30 @@ Open a socket
 
 * Accumulator : The socket file descriptor (sockfd) or -1 on error
 
+***Example***
+
+```asm
+ .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+ SOCKET domain, type, protocol
+ ; A contains the socket file descriptor (sockfd) or -1 on error
+ cmp #INVALID_SOCKET
+ beq @error
+ ; No error
+ sta socket_fd
+ rts
+ @error:
+ ; Error
+ rts
+domain:
+ .byt #AF_INET
+type:
+ .byt #SOCK_STREAM
+protocol:
+ .byt $00 ; Not handled yet
+socket_fd:
+ .byt $00
+```
+
 ---
 
 ## CONNECT
@@ -36,7 +60,7 @@ CONNECT socket, ip, dest_port
 
 ### Description
 
-Connect a socket to a remote address
+Connect a socket to a remote address (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xconnect/)
 
 
 ### Input
@@ -44,8 +68,22 @@ Connect a socket to a remote address
 | param      | Description                          |
 | ----------- | ------------------------------------ |
 | socket | The socket file descriptor |
-| ip | The IP address to connect to (address ex $abcd) |
+| ip | The IP address to connect to (address ex $abcd) 32 bits big endian |
 | dest_port | The destination port to connect to (address ex $abcd) |
+
+***Example***
+
+```asm
+ .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+ CONNECT socket_fd, ip, dest_port
+ rts
+ip:
+ .word $C0A80001 ; 192.168.0.1
+dest_port:
+ .word $0050 ; 80
+socket_fd:
+ .byt $00
+```
 
 ---
 
@@ -57,7 +95,7 @@ SEND socket, buffer, length
 
 ### Description
 
-Send data through a socket
+Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
 
 
 ### Input
@@ -67,6 +105,20 @@ Send data through a socket
 | socket | The socket file descriptor |
 | buffer | The buffer containing the data to send (address ex $abcd) |
 | length | The length of the data to send (address ex $abcd) |
+
+***Example***
+
+```asm
+ .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+ SEND socket_fd, buffer, length
+ rts
+buffer:
+ .dsb 1000 ; Buffer address
+length:
+ .word 1000 ; Buffer length
+socket_fd:
+ .byt $00
+```
 
 ---
 
@@ -78,7 +130,7 @@ RECV socket, buffer, length
 
 ### Description
 
-Receive data from a socket
+Receive data from a socket, uses TR0 (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xrecv/)
 
 
 ### Input
@@ -89,27 +141,18 @@ Receive data from a socket
 | buffer | The buffer to store the received data (address ex $abcd) |
 | length | The length of the buffer (address ex $abcd) |
 
-### Description
+***Example***
 
-Get socket data RES contains the buffer but it's modifyed. Keep ptr
-
-* Y Register : Low ptr to store the buffer
-* X Register : High ptr to store the buffer
-
-
-### Modify
-
-* RES
-* RESB
-* TR1
-* TR2
-
-
-### Returns
-
-* Accumulator : Error type. If A = EOK then something had been received
-* X Register : Low length
-* Y Register : High length
+```asm
+ RECV mysocket, mybuffer, length
+ rts
+mysocket:
+ .byt $00
+buffer:
+ .dsb 1000
+length:
+ .word 1000
+```
 
 ---
 
@@ -121,7 +164,7 @@ CLOSE_SOCKET socket
 
 ### Description
 
-Close a socket
+Close a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocketclose/)
 
 
 ### Input
@@ -129,4 +172,13 @@ Close a socket
 | param      | Description                          |
 | ----------- | ------------------------------------ |
 | socket | The socket file descriptor |
+
+***Example***
+
+```asm
+ CLOSE_SOCKET mysocket
+ rts
+mysocket:
+ .byt $00
+```
 

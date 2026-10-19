@@ -5,18 +5,43 @@
 .define KERNEL_SEND_NETWORK              $09
 .define KERNEL_SOCKET_CLOSE_NETWORK      $0A
 
-
 .define KERNEL_NETWORK_ROUTINES_NUMBER  $01 ; The set of routines that are used to manage the network. This is the number of the routine set.
 
 .macro SOCKET domain, type, protocol
     ;;@proto SOCKET domain, type, protocol
-    ;;@brief Open a socket
+    ;;@brief Open a socket (protocol is not handled yet) (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocket/)
     ;;@param domain The communication domain (e.g., AF_INET) (adress ex $abcd)
     ;;@param type The type of socket (e.g., SOCK_STREAM) (address ex $abcd)
     ;;@param protocol The protocol to be used (e.g., IPPROTO_TCP) (address ex $abcd)
     ;;@returnsA The socket file descriptor (sockfd) or -1 on error
+    ;;@```asm
+    ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+    ;;@` SOCKET domain, type, protocol
+    ;;@` ; A contains the socket file descriptor (sockfd) or -1 on error
+    ;;@` cmp     #INVALID_SOCKET
+    ;;@` beq     @error
+    ;;@` ; No error
+    ;;@` sta     socket_fd
+    ;;@` rts
+    ;;@` @error:
+    ;;@` ; Error
+    ;;@` rts
+    ;;@`domain:
+    ;;@`   .byt #AF_INET
+    ;;@`type:
+    ;;@`   .byt #SOCK_STREAM
+    ;;@`protocol:
+    ;;@`   .byt $00 ; Not handled yet
+    ;;@`socket_fd:
+    ;;@`   .byt $00
+    ;;@```
 
-
+    .if (.not .blank({domain}))
+    .endif
+    .if (.not .blank({type}))
+    .endif
+    .if (.not .blank({protocol}))
+    .endif
     lda     #$00
     ldx     domain
     ldy     type
@@ -25,14 +50,31 @@
     BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
 
-;int connect(int sockfd, const struct sockaddr *serv_addr,
-;            socklen_t addrlen);
+
 .macro CONNECT socket, ip, dest_port
     ;;@proto CONNECT socket, ip, dest_port
-    ;;@brief Connect a socket to a remote address
+    ;;@brief Connect a socket to a remote address (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xconnect/)
     ;;@param socket The socket file descriptor
-    ;;@param ip The IP address to connect to (address ex $abcd)
+    ;;@param ip The IP address to connect to (address ex $abcd) 32 bits big endian
     ;;@param dest_port The destination port to connect to (address ex $abcd)
+    ;;@```asm
+    ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+    ;;@` CONNECT socket_fd, ip, dest_port
+    ;;@` rts
+    ;;@`ip:
+    ;;@`   .word $C0A80001 ; 192.168.0.1
+    ;;@`dest_port:
+    ;;@`   .word $0050 ; 80
+    ;;@`socket_fd:
+    ;;@`   .byt $00
+    ;;@```
+    .if (.not .blank({socket}))
+    .endif
+    .if (.not .blank({ip}))
+    .endif
+    .if (.not .blank({dest_port}))
+    .endif
+
     lda     dest_port  ; Port 80
     sta     RESB
     lda     dest_port + 1 ; Port ie 80
@@ -47,11 +89,30 @@
 
 .macro SEND socket, buffer, length
     ;;@proto SEND socket, buffer, length
-    ;;@brief Send data through a socket
+    ;;@brief Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
     ;;@param socket The socket file descriptor
     ;;@param buffer The buffer containing the data to send (address ex $abcd)
     ;;@param length The length of the data to send (address ex $abcd)
     ;;@paramMemoryTR0
+    ;;@```asm
+    ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+    ;;@` SEND socket_fd, buffer, length
+    ;;@` rts
+    ;;@`buffer:
+    ;;@`   .dsb 1000 ; Buffer address
+    ;;@`length:
+    ;;@`   .word 1000 ; Buffer length
+    ;;@`socket_fd:
+    ;;@`   .byt $00
+    ;;@```
+
+    .if (.not .blank({socket}))
+    .endif
+    .if (.not .blank({buffer}))
+    .endif
+    .if (.not .blank({length}))
+    .endif
+
     lda     socket
     sta     TR0
     ; Set buffer
@@ -70,27 +131,32 @@
 
 .macro RECV socket, buffer, length
     ;;@proto RECV socket, buffer, length
-    ;;@brief Receive data from a socket
+    ;;@brief Receive data from a socket, uses TR0 (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xrecv/)
     ;;@param socket The socket file descriptor
     ;;@param buffer The buffer to store the received data (address ex $abcd)
     ;;@param length The length of the buffer (address ex $abcd)
+    ;;@```asm
+    ;;@` RECV mysocket, mybuffer, length
+    ;;@` rts
+    ;;@`mysocket:
+    ;;@`  .byt $00
+    ;;@`buffer:
+    ;;@`  .dsb 1000
+    ;;@`length:
+    ;;@`  .word 1000
+    ;;@```
+    .if (.not .blank({socket}))
+    .endif
+    .if (.not .blank({buffer}))
+    .endif
+    .if (.not .blank({length}))
+    .endif
 
     lda     socket
     sta     TR0
 
     ldy     buffer
     ldx     buffer + 1
-    ;;@brief Get socket data RES contains the buffer but it's modifyed. Keep ptr 
-    ;;@inputTR0 Socket id
-    ;;@inputY Low ptr to store the buffer
-    ;;@inputX High ptr to store the buffer
-    ;;@modifyMEM_RES
-    ;;@modifyMEM_RESB
-    ;;@modifyMEM_TR1
-    ;;@modifyMEM_TR2
-    ;;@returnsA Error type. If A = EOK then something had been received
-    ;;@returnsX Low length
-    ;;@returnsY High length
 
     lda     #KERNEL_RECV_NETWORK
     BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
@@ -102,8 +168,16 @@
 
 .macro CLOSE_SOCKET socket
     ;;@proto CLOSE_SOCKET socket
-    ;;@brief Close a socket
+    ;;@brief Close a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocketclose/)
     ;;@param socket The socket file descriptor
+    ;;@```asm
+    ;;@` CLOSE_SOCKET mysocket
+    ;;@` rts
+    ;;@`mysocket:
+    ;;@`   .byt $00
+    ;;@```
+    .if (.not .blank({socket}))
+    .endif
     ldx     socket
     lda     #KERNEL_SOCKET_CLOSE_NETWORK
     BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER

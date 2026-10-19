@@ -969,33 +969,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#description_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      Description
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#modify" class="md-nav__link">
-    <span class="md-ellipsis">
-      Modify
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#returns_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Returns
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1021,7 +994,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#description_5" class="md-nav__link">
+  <a href="#description_4" class="md-nav__link">
     <span class="md-ellipsis">
       Description
     </span>
@@ -1065,7 +1038,7 @@
 <h3 id="syntax">Syntax</h3>
 <p>SOCKET domain, type, protocol</p>
 <h3 id="description">Description</h3>
-<p>Open a socket</p>
+<p>Open a socket (protocol is not handled yet) (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocket/)</p>
 <h3 id="input">Input</h3>
 <table>
 <thead>
@@ -1093,12 +1066,33 @@
 <ul>
 <li>Accumulator : The socket file descriptor (sockfd) or -1 on error</li>
 </ul>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<span class="w"> </span><span class="nf">SOCKET</span><span class="w"> </span><span class="no">domain</span><span class="p">,</span><span class="w"> </span><span class="no">type</span><span class="p">,</span><span class="w"> </span><span class="no">protocol</span>
+<span class="w"> </span><span class="c1">; A contains the socket file descriptor (sockfd) or -1 on error</span>
+<span class="w"> </span><span class="nf">cmp</span><span class="w"> </span><span class="c1">#INVALID_SOCKET</span>
+<span class="w"> </span><span class="nf">beq</span><span class="w"> </span><span class="err">@</span><span class="no">error</span>
+<span class="w"> </span><span class="c1">; No error</span>
+<span class="w"> </span><span class="nf">sta</span><span class="w"> </span><span class="no">socket_fd</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="w"> </span><span class="err">@</span><span class="nl">error:</span>
+<span class="w"> </span><span class="c1">; Error</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="nl">domain:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="c1">#AF_INET</span>
+<span class="nl">type:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="c1">#SOCK_STREAM</span>
+<span class="nl">protocol:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span><span class="w"> </span><span class="c1">; Not handled yet</span>
+<span class="nl">socket_fd:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
+</code></pre></div>
 <hr>
 <h2 id="connect">CONNECT</h2>
 <h3 id="syntax_1">Syntax</h3>
 <p>CONNECT socket, ip, dest_port</p>
 <h3 id="description_1">Description</h3>
-<p>Connect a socket to a remote address</p>
+<p>Connect a socket to a remote address (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xconnect/)</p>
 <h3 id="input_1">Input</h3>
 <table>
 <thead>
@@ -1114,7 +1108,7 @@
 </tr>
 <tr>
 <td>ip</td>
-<td>The IP address to connect to (address ex $abcd)</td>
+<td>The IP address to connect to (address ex $abcd) 32 bits big endian</td>
 </tr>
 <tr>
 <td>dest_port</td>
@@ -1122,12 +1116,23 @@
 </tr>
 </tbody>
 </table>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<span class="w"> </span><span class="nf">CONNECT</span><span class="w"> </span><span class="no">socket_fd</span><span class="p">,</span><span class="w"> </span><span class="no">ip</span><span class="p">,</span><span class="w"> </span><span class="no">dest_port</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="nl">ip:</span>
+<span class="w"> </span><span class="na">.word</span><span class="w"> </span><span class="no">$C0A80001</span><span class="w"> </span><span class="c1">; 192.168.0.1</span>
+<span class="nl">dest_port:</span>
+<span class="w"> </span><span class="na">.word</span><span class="w"> </span><span class="no">$0050</span><span class="w"> </span><span class="c1">; 80</span>
+<span class="nl">socket_fd:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
+</code></pre></div>
 <hr>
 <h2 id="send">SEND</h2>
 <h3 id="syntax_2">Syntax</h3>
 <p>SEND socket, buffer, length</p>
 <h3 id="description_2">Description</h3>
-<p>Send data through a socket</p>
+<p>Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)</p>
 <h3 id="input_2">Input</h3>
 <table>
 <thead>
@@ -1151,12 +1156,23 @@
 </tr>
 </tbody>
 </table>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<span class="w"> </span><span class="nf">SEND</span><span class="w"> </span><span class="no">socket_fd</span><span class="p">,</span><span class="w"> </span><span class="no">buffer</span><span class="p">,</span><span class="w"> </span><span class="no">length</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="nl">buffer:</span>
+<span class="w"> </span><span class="na">.dsb</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="c1">; Buffer address</span>
+<span class="nl">length:</span>
+<span class="w"> </span><span class="na">.word</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="c1">; Buffer length</span>
+<span class="nl">socket_fd:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
+</code></pre></div>
 <hr>
 <h2 id="recv">RECV</h2>
 <h3 id="syntax_3">Syntax</h3>
 <p>RECV socket, buffer, length</p>
 <h3 id="description_3">Description</h3>
-<p>Receive data from a socket</p>
+<p>Receive data from a socket, uses TR0 (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xrecv/)</p>
 <h3 id="input_3">Input</h3>
 <table>
 <thead>
@@ -1180,31 +1196,22 @@
 </tr>
 </tbody>
 </table>
-<h3 id="description_4">Description</h3>
-<p>Get socket data RES contains the buffer but it's modifyed. Keep ptr</p>
-<ul>
-<li>Y Register : Low ptr to store the buffer</li>
-<li>X Register : High ptr to store the buffer</li>
-</ul>
-<h3 id="modify">Modify</h3>
-<ul>
-<li>RES</li>
-<li>RESB</li>
-<li>TR1</li>
-<li>TR2</li>
-</ul>
-<h3 id="returns_1">Returns</h3>
-<ul>
-<li>Accumulator : Error type. If A = EOK then something had been received</li>
-<li>X Register : Low length</li>
-<li>Y Register : High length</li>
-</ul>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nf">RECV</span><span class="w"> </span><span class="no">mysocket</span><span class="p">,</span><span class="w"> </span><span class="no">mybuffer</span><span class="p">,</span><span class="w"> </span><span class="no">length</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="nl">mysocket:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
+<span class="nl">buffer:</span>
+<span class="w"> </span><span class="na">.dsb</span><span class="w"> </span><span class="mi">1000</span>
+<span class="nl">length:</span>
+<span class="w"> </span><span class="na">.word</span><span class="w"> </span><span class="mi">1000</span>
+</code></pre></div>
 <hr>
 <h2 id="close_socket">CLOSE_SOCKET</h2>
 <h3 id="syntax_4">Syntax</h3>
 <p>CLOSE_SOCKET socket</p>
-<h3 id="description_5">Description</h3>
-<p>Close a socket</p>
+<h3 id="description_4">Description</h3>
+<p>Close a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocketclose/)</p>
 <h3 id="input_4">Input</h3>
 <table>
 <thead>
@@ -1219,7 +1226,13 @@
 <td>The socket file descriptor</td>
 </tr>
 </tbody>
-</table></div>
+</table>
+<p><strong><em>Example</em></strong></p>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nf">CLOSE_SOCKET</span><span class="w"> </span><span class="no">mysocket</span>
+<span class="w"> </span><span class="nf">rts</span>
+<span class="nl">mysocket:</span>
+<span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
+</code></pre></div></div>
 
 
 
