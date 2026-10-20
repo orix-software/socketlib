@@ -29,6 +29,10 @@ Each routines call subroutine from kernel
 - [RECV socket, buffer, length](socket_macro.md)
 - [CLOSE_SOCKET socket](socket_macro.md)
 
+## Examples
+
+- [Gethttp](gethttp.md)
+
 
 
 <!-- BPMEND -->
