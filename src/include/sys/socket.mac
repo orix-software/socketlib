@@ -16,6 +16,7 @@
     ;;@returnsA The socket file descriptor (sockfd) or -1 on error
     ;;@```asm
     ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+    ;;@` .include "sys/socket.mac"
     ;;@` SOCKET domain, type, protocol
     ;;@` ; A contains the socket file descriptor (sockfd) or -1 on error
     ;;@` cmp     #INVALID_SOCKET
@@ -58,7 +59,7 @@
     ;;@param ip The IP address to connect to (address ex $abcd) 32 bits big endian
     ;;@param dest_port The destination port to connect to (address ex $abcd)
     ;;@```asm
-    ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+    ;;@` .include "sys/socket.mac"
     ;;@` CONNECT socket_fd, ip, dest_port
     ;;@` rts
     ;;@`ip:
@@ -89,12 +90,14 @@
 
 .macro SEND socket, buffer, length
     ;;@proto SEND socket, buffer, length
-    ;;@brief Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
+    ;;@brief Send data through a socket , returns $FF in A if error, else returns EOK in A (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
     ;;@param socket The socket file descriptor
     ;;@param buffer The buffer containing the data to send (address ex $abcd)
     ;;@param length The length of the data to send (address ex $abcd)
     ;;@paramMemoryTR0
+    ;;@paramMemoryTR1
     ;;@```asm
+    ;;@` .include "sys/socket.mac"
     ;;@` .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
     ;;@` SEND socket_fd, buffer, length
     ;;@` rts
@@ -129,13 +132,17 @@
     BRK_TELEMON KERNEL_NETWORK_ROUTINES_NUMBER
 .endmacro
 
-.macro RECV socket, buffer, length
-    ;;@proto RECV socket, buffer, length
+.macro RECV socket, buffer
+    ;;@proto RECV socket, buffer
     ;;@brief Receive data from a socket, uses TR0 (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xrecv/)
     ;;@param socket The socket file descriptor
     ;;@param buffer The buffer to store the received data (address ex $abcd)
     ;;@param length The length of the buffer (address ex $abcd)
+    ;;@returnsY The number of bytes received (low byte in Y, high byte in X)
+    ;;@returnsX The number of bytes received (high byte in Y, high byte in X)
+    ;;@returnsA The status of the operation (EOK on success, or ETIMEDOUT for Timeout)
     ;;@```asm
+    ;;@` .include "sys/socket.mac"
     ;;@` RECV mysocket, mybuffer, length
     ;;@` rts
     ;;@`mysocket:
@@ -171,6 +178,7 @@
     ;;@brief Close a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsocketclose/)
     ;;@param socket The socket file descriptor
     ;;@```asm
+    ;;@` .include "sys/socket.mac"
     ;;@` CLOSE_SOCKET mysocket
     ;;@` rts
     ;;@`mysocket:

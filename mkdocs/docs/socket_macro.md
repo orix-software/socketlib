@@ -30,6 +30,7 @@ Open a socket (protocol is not handled yet) (see kernel routine for more informa
 
 ```asm
  .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+ .include "sys/socket.mac"
  SOCKET domain, type, protocol
  ; A contains the socket file descriptor (sockfd) or -1 on error
  cmp #INVALID_SOCKET
@@ -74,7 +75,7 @@ Connect a socket to a remote address (see kernel routine for more information: h
 ***Example***
 
 ```asm
- .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
+ .include "sys/socket.mac"
  CONNECT socket_fd, ip, dest_port
  rts
 ip:
@@ -95,7 +96,7 @@ SEND socket, buffer, length
 
 ### Description
 
-Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
+Send data through a socket , returns $FF in A if error, else returns EOK in A (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)
 
 
 ### Input
@@ -109,6 +110,7 @@ Send data through a socket (see kernel routine for more information: https://ori
 ***Example***
 
 ```asm
+ .include "sys/socket.mac"
  .include "sys/socket.inc" to get 'INVALID_SOCKET' definition
  SEND socket_fd, buffer, length
  rts
@@ -126,7 +128,7 @@ socket_fd:
 
 ### Syntax
 
-RECV socket, buffer, length
+RECV socket, buffer
 
 ### Description
 
@@ -141,9 +143,17 @@ Receive data from a socket, uses TR0 (see kernel routine for more information: h
 | buffer | The buffer to store the received data (address ex $abcd) |
 | length | The length of the buffer (address ex $abcd) |
 
+
+### Returns
+
+* Y Register : The number of bytes received (low byte in Y, high byte in X)
+* X Register : The number of bytes received (high byte in Y, high byte in X)
+* Accumulator : The status of the operation (EOK on success, or ETIMEDOUT for Timeout)
+
 ***Example***
 
 ```asm
+ .include "sys/socket.mac"
  RECV mysocket, mybuffer, length
  rts
 mysocket:
@@ -176,6 +186,7 @@ Close a socket (see kernel routine for more information: https://orix-software.g
 ***Example***
 
 ```asm
+ .include "sys/socket.mac"
  CLOSE_SOCKET mysocket
  rts
 mysocket:
