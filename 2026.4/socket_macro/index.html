@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../bind/">
+      
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -16,7 +18,7 @@
     
     
       
-        <title>Macros - SOCKET LIB DOCUMENTATION</title>
+        <title>All macros - SOCKET LIB DOCUMENTATION</title>
       
     
     
@@ -104,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Macros
+              All macros
             
           </span>
         </div>
@@ -234,11 +236,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../socket_macro.md#SOCKET" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -612,24 +616,29 @@
       
   
   
+    
   
   
+  
     
     
     
     
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -642,7 +651,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Macros
@@ -653,112 +662,290 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../socket_macro.md#SOCKET" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    All macros
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
-    SOCKET domain, type, protocol
+    All macros
     
   </span>
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../socket_macro.md#CONNECT" class="md-nav__link">
+      
         
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  <span class="md-ellipsis">
-    CONNECT socket, ip, dest_port
+  
     
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      SOCKET
+    </span>
+  </a>
   
-  
-    <li class="md-nav__item">
-      <a href="../socket_macro.md#SEND" class="md-nav__link">
+    <nav class="md-nav" aria-label="SOCKET">
+      <ul class="md-nav__list">
         
+          <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
   
-  
-  <span class="md-ellipsis">
-    SEND socket, buffer, length
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../socket_macro.md#RECV" class="md-nav__link">
+</li>
         
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
   
-  
-  <span class="md-ellipsis">
-    RECV socket, buffer, length
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../socket_macro.md#CLOSE_SOCKET" class="md-nav__link">
+</li>
         
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
   
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
   
-  <span class="md-ellipsis">
-    CLOSE_SOCKET socket
-    
-  </span>
+</li>
+        
+      </ul>
+    </nav>
   
-
-      </a>
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      CONNECT
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CONNECT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    <span class="md-ellipsis">
+      SEND
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SEND">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recv" class="md-nav__link">
+    <span class="md-ellipsis">
+      RECV
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RECV">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#close_socket" class="md-nav__link">
+    <span class="md-ellipsis">
+      CLOSE_SOCKET
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CLOSE_SOCKET">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntax_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntax
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Description
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#input_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Input
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -969,6 +1156,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1068,6 +1264,7 @@
 </ul>
 <p><strong><em>Example</em></strong></p>
 <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.mac"</span>
 <span class="w"> </span><span class="nf">SOCKET</span><span class="w"> </span><span class="no">domain</span><span class="p">,</span><span class="w"> </span><span class="no">type</span><span class="p">,</span><span class="w"> </span><span class="no">protocol</span>
 <span class="w"> </span><span class="c1">; A contains the socket file descriptor (sockfd) or -1 on error</span>
 <span class="w"> </span><span class="nf">cmp</span><span class="w"> </span><span class="c1">#INVALID_SOCKET</span>
@@ -1117,7 +1314,7 @@
 </tbody>
 </table>
 <p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.mac"</span>
 <span class="w"> </span><span class="nf">CONNECT</span><span class="w"> </span><span class="no">socket_fd</span><span class="p">,</span><span class="w"> </span><span class="no">ip</span><span class="p">,</span><span class="w"> </span><span class="no">dest_port</span>
 <span class="w"> </span><span class="nf">rts</span>
 <span class="nl">ip:</span>
@@ -1132,7 +1329,7 @@
 <h3 id="syntax_2">Syntax</h3>
 <p>SEND socket, buffer, length</p>
 <h3 id="description_2">Description</h3>
-<p>Send data through a socket (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)</p>
+<p>Send data through a socket , returns $FF in A if error, else returns EOK in A (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xsend/)</p>
 <h3 id="input_2">Input</h3>
 <table>
 <thead>
@@ -1157,7 +1354,8 @@
 </tbody>
 </table>
 <p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.mac"</span>
+<span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.inc"</span><span class="w"> </span><span class="no">to</span><span class="w"> </span><span class="no">get</span><span class="w"> </span><span class="err">'</span><span class="no">INVALID_SOCKET</span><span class="err">'</span><span class="w"> </span><span class="no">definition</span>
 <span class="w"> </span><span class="nf">SEND</span><span class="w"> </span><span class="no">socket_fd</span><span class="p">,</span><span class="w"> </span><span class="no">buffer</span><span class="p">,</span><span class="w"> </span><span class="no">length</span>
 <span class="w"> </span><span class="nf">rts</span>
 <span class="nl">buffer:</span>
@@ -1170,7 +1368,7 @@
 <hr>
 <h2 id="recv">RECV</h2>
 <h3 id="syntax_3">Syntax</h3>
-<p>RECV socket, buffer, length</p>
+<p>RECV socket, buffer</p>
 <h3 id="description_3">Description</h3>
 <p>Receive data from a socket, uses TR0 (see kernel routine for more information: https://orix-software.github.io/developer_manual/kernel/primitives/xrecv/)</p>
 <h3 id="input_3">Input</h3>
@@ -1196,8 +1394,15 @@
 </tr>
 </tbody>
 </table>
+<h3 id="returns_1">Returns</h3>
+<ul>
+<li>Y Register : The number of bytes received (low byte in Y, high byte in X)</li>
+<li>X Register : The number of bytes received (high byte in Y, high byte in X)</li>
+<li>Accumulator : The status of the operation (EOK on success, or ETIMEDOUT for Timeout)</li>
+</ul>
 <p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nf">RECV</span><span class="w"> </span><span class="no">mysocket</span><span class="p">,</span><span class="w"> </span><span class="no">mybuffer</span><span class="p">,</span><span class="w"> </span><span class="no">length</span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.mac"</span>
+<span class="w"> </span><span class="nf">RECV</span><span class="w"> </span><span class="no">mysocket</span><span class="p">,</span><span class="w"> </span><span class="no">mybuffer</span><span class="p">,</span><span class="w"> </span><span class="no">length</span>
 <span class="w"> </span><span class="nf">rts</span>
 <span class="nl">mysocket:</span>
 <span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
@@ -1228,7 +1433,8 @@
 </tbody>
 </table>
 <p><strong><em>Example</em></strong></p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nf">CLOSE_SOCKET</span><span class="w"> </span><span class="no">mysocket</span>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="na">.include</span><span class="w"> </span><span class="s">"sys/socket.mac"</span>
+<span class="w"> </span><span class="nf">CLOSE_SOCKET</span><span class="w"> </span><span class="no">mysocket</span>
 <span class="w"> </span><span class="nf">rts</span>
 <span class="nl">mysocket:</span>
 <span class="w"> </span><span class="na">.byt</span><span class="w"> </span><span class="no">$00</span>
@@ -1253,7 +1459,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    2026-10-18
+    2026-10-19
   </span>
 
     
